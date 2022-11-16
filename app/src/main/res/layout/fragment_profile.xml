@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="635dp"
         android:layout_marginTop="-70dp"
+        android:contentDescription="TODO"
         android:src="@drawable/austin_wade_x6uj51n5ce8_unsplash" />
 
     <TextView
