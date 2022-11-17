@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/luckywheel"
         android:layout_marginTop="20dp"
-        android:text="SPIN"
+        android:text="@string/spin"
         android:contentDescription="@string/app_name"
-        android:onClick="btnClick"></Button>
+        android:onClick="btnClick" />
 </RelativeLayout>

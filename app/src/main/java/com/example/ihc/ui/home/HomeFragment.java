@@ -29,9 +29,10 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     LuckyWheel wheel;
-    List<WheelItem> wheelItemList=new ArrayList<>();
+    List<WheelItem> wheelItemList = new ArrayList<>();
     String points;
-    public static int time=0;
+    public static int time = 0;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -39,8 +40,6 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-
 
         wheel = binding.luckywheel;
         WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(
@@ -63,32 +62,26 @@ public class HomeFragment extends Fragment {
         WheelItem whellItem6 = new WheelItem(ResourcesCompat.getColor(
                 getResources(), R.color.teal_200, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
         wheelItemList.add(whellItem6);
-        if(time<1){
-        wheel.addWheelItems(wheelItemList);
+        if (time < 1) {
+            wheel.addWheelItems(wheelItemList);
             time++;
         }
 
-        wheel.setLuckyWheelReachTheTarget(new OnLuckyWheelReachTheTarget() {
-            @Override
-            public void onReachTarget() {
-                Intent i = new Intent(getActivity(), Match.class);
-                startActivity(i);
-            }
+        wheel.setLuckyWheelReachTheTarget(() -> {
+            Intent i = new Intent(getActivity(), Match.class);
+            startActivity(i);
         });
 
         Button a = binding.btn;
-        a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Random random = new Random();
-            points= String.valueOf(random.nextInt(10));
-            if(points.equals("0")){
-        points=String.valueOf(1);
-    }
-            wheel.rotateWheelTo(Integer.parseInt(points));
+        a.setOnClickListener(view -> {
+            Random random = new Random();
+            points = String.valueOf(random.nextInt(10));
+            if (points.equals("0")) {
+                points = String.valueOf(1);
             }
+            wheel.rotateWheelTo(Integer.parseInt(points));
         });
-        return  root;
+        return root;
     }
 }
 
