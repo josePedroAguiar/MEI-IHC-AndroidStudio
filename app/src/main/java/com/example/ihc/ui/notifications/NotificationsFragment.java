@@ -22,6 +22,7 @@ public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
     ArrayList <String> nomes = new ArrayList (Arrays.asList(new String[]{"Miguel", "Tiago", "José", "Pedro", "Tomás"}));
+    ArrayList <String> subitems = new ArrayList (Arrays.asList(new String[]{"Miguel", "Tiago", "José", "Pedro", "Tomás"}));
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel =
