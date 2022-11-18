@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.ihc.databinding.FragmentSecondBinding;
+//import com.example.ihc.databinding.FragmentSecondBinding;
 
 public class SecondFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
+    /*private FragmentSecondBinding binding;
 
     @Override
     public View onCreateView(
@@ -42,6 +42,6 @@ public class SecondFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
+    }*/
 
 }

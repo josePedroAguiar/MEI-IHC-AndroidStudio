@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
 android:id="@+id/container"
 android:layout_width="match_parent"
 android:background="@color/background"
 android:layout_height="match_parent">
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-
-        android:layout_height="56dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="@color/background"
-
-        app:itemIconSize="36dp"
-        app:itemIconTint="@color/bnv_tab_item_foreground"
-        app:itemTextColor="@color/bnv_tab_item_foreground"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
-
-
     <RelativeLayout
 
     android:layout_width="match_parent"
@@ -36,7 +21,7 @@ android:layout_height="match_parent">
             android:layout_width="match_parent"
             android:layout_height="600dp"
             android:layout_marginTop="-70dp"
-            android:contentDescription="TODO"
+            android:contentDescription="Fotos"
             android:src="@drawable/austin_wade_x6uj51n5ce8_unsplash" />
 
         <TextView
@@ -64,43 +49,44 @@ android:layout_height="match_parent">
         android:textColor="@color/black"
         android:text="" />
 
-    <RelativeLayout
-        android:id="@+id/relative_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
-        android:layout_below="@+id/scode_profile"
-        android:paddingVertical="10dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/relative_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="70dp">
+            android:layout_below="@+id/scode_profile"
+            android:layout_marginTop="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingVertical="10dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:textColor="@color/white"
-                android:textSize="12sp"/>
+                android:layout_marginStart="70dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/name_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chris Morris"
-                android:textSize="26sp"
-                android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/name_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chris Morris"
+                    android:textColor="@color/white"
+                    android:textSize="26sp" />
 
-    </RelativeLayout>
+            </LinearLayout>
 
+        </RelativeLayout>
 
-    <RelativeLayout
+        <RelativeLayout
         android:id="@+id/relative_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -204,13 +190,16 @@ android:layout_height="match_parent">
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/content_match"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/foto"
-            android:layout_marginLeft="250dp"
+        <fragment
+
+            android:layout_width="211dp"
+            android:layout_height="750dp"
+            android:layout_marginLeft="200dp"
             android:layout_marginBottom="3dp"
-            />
+            android:id="@+id/navigation_home"
+            android:name="com.example.ihc.FirstFragment"
+            tools:layout="@layout/fragment_first" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

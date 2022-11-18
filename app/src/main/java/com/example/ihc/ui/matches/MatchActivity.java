@@ -29,6 +29,7 @@ public class MatchActivity extends AppCompatActivity {
             String country = intent.getStringExtra("country");
             int imageid = intent.getIntExtra("imageid", R.drawable.ic_baseline_person_24);
 
+
             binding.nameProfile.setText(name);
             binding.phoneProfile.setText(phone);
             binding.countryProfile.setText(country);
