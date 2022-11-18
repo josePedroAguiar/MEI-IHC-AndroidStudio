@@ -9,10 +9,10 @@
 
 
     <com.bluehomestudio.luckywheel.LuckyWheel
+        android:layout_marginTop="100dp"
         android:layout_width="400dp"
         android:layout_height="400dp"
-        android:id="@+id/luckywheel"
-        >
+        android:id="@+id/luckywheel">
 
 
     </com.bluehomestudio.luckywheel.LuckyWheel>

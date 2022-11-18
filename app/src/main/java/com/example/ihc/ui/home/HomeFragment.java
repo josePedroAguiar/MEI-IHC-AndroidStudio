@@ -1,12 +1,12 @@
 package com.example.ihc.ui.home;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -43,6 +43,10 @@ public class HomeFragment extends Fragment {
 
 
         wheel = binding.luckywheel;
+        wheel.setRotation(-90);
+        ObjectAnimator animation = ObjectAnimator.ofFloat(wheel, "translationX", 550);
+        animation.start();
+
         WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(
                 getResources(), R.color.purple_500, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
         wheelItemList.add(whellItem);
@@ -75,8 +79,7 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });
-
-        Button a = binding.btn;
+        LuckyWheel a = binding.luckywheel;
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

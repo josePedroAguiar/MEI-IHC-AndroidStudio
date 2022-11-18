@@ -22,6 +22,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.matches.MatchActivity"
+            android:exported="false"
+            android:label="@string/title_activity_match"
+            android:theme="@style/Theme.IHC.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Match"
             android:exported="false"
             android:label="@string/title_activity_match"

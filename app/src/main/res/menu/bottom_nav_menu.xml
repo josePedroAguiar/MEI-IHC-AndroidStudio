@@ -7,7 +7,7 @@
 
         android:title="@string/title_home" />
     <item
-        android:id="@+id/match"
+        android:id="@+id/navigation_match"
         android:icon="@drawable/ic_outline_person_pin_circle_24"
         android:state_checked="true"
 

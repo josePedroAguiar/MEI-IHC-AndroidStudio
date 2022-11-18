@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <!--  Single List Item Design -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context=".ui.notifications.NotificationsFragment" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.matches.MatchFragment">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,13 +19,13 @@ tools:context=".ui.notifications.NotificationsFragment" >
             android:textSize="34sp"
             android:textColor="#ffffff"
             android:letterSpacing="0.02"
-            tools:text="Messages"/>
+            tools:text="Matches"/>
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/mobile_list"
+        android:id="@+id/match_list"
         android:layout_width="395dp"
         android:layout_height="545dp"></ListView>
 
 
-</LinearLayout>
+</RelativeLayout>

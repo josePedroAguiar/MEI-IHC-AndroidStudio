@@ -23,4 +23,9 @@
         android:name="com.example.ihc.ui.notifications.NotificationsFragment"
         android:label="@string/title_mensagem"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_match"
+        android:name="com.example.ihc.ui.matches.MatchFragment"
+        android:label="Matches"
+        tools:layout="@layout/fragment_mathes" />
 </navigation>

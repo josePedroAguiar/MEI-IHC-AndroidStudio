@@ -1,40 +1,33 @@
-package com.example.ihc.ui.notifications;
+package com.example.ihc.ui.matches;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.ihc.MainActivity;
 import com.example.ihc.R;
-import com.example.ihc.databinding.FragmentNotificationsBinding;
+import com.example.ihc.databinding.FragmentMathesBinding;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class NotificationsFragment extends Fragment {
+public class MatchFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
-    ArrayList <String> nomes = new ArrayList (Arrays.asList(new String[]{"Miguel", "Tiago", "José", "Pedro", "Tomás"}));
-    ArrayList <String> subitems = new ArrayList (Arrays.asList(new String[]{"Miguel", "Tiago", "José", "Pedro", "Tomás"}));
+    private FragmentMathesBinding binding;
+    public static int time=0;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        MatchViewModel homeViewModel =
+                new ViewModelProvider(this).get(MatchViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentMathesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-
-
 
         ///
 
@@ -48,28 +41,40 @@ public class NotificationsFragment extends Fragment {
                 "9439043232","7534354323","6545543211","7654432343"};
         String[] country = {"United States","Russia","India","Israel","Germany","Thailand","Canada","France","Switzerland"};
 
-        ArrayList<User> userArrayList = new ArrayList<>();
+        ArrayList<Match> userArrayList = new ArrayList<>();
         for(int i = 0;i<9;i++){
 
-            User user = new User(name[i],lastMessage[i],lastmsgTime[i],phoneNo[i],country[i],0);
-            userArrayList.add(user);
+            Match match = new Match(name[i],lastMessage[i],lastmsgTime[i],phoneNo[i],country[i],0);
+            userArrayList.add(match);
 
         }
         ///
 
 
-        ListAdapter adapter = new ListAdapter(getActivity(),userArrayList);
+        ListAdapterMatch adapter = new ListAdapterMatch(getActivity(),userArrayList);
         //ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,R.id.text_view,nomes);
-        ListView listView =  root.findViewById(R.id.mobile_list);
+        ListView listView =  root.findViewById(R.id.match_list);
         listView.setAdapter(adapter);
         listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent i = new Intent(getActivity(), MatchActivity.class);
+                i.putExtra("name",name[position]);
+                i.putExtra("phone",phoneNo[position]);
+                i.putExtra("country",country[position]);
+                //i.putExtra("imageid",imageId[position]);
+                startActivity(i);
+
+            }
+        });
+
+
         return root;
     }
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
 }
+
+
+
+
