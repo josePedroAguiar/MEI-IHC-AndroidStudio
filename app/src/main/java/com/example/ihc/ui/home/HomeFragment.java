@@ -76,15 +76,11 @@ public class HomeFragment extends Fragment {
             startActivity(i);
         });
         LuckyWheel a = binding.luckywheel;
-        a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Random random = new Random();
-            points= String.valueOf(random.nextInt(10));
-            if(points.equals("0")){
-        points=String.valueOf(1);
-    }
-            wheel.rotateWheelTo(Integer.parseInt(points));
+        a.setOnClickListener(view -> {
+            Random random = new Random();
+            points = String.valueOf(random.nextInt(10));
+            if (points.equals("0")) {
+                points = String.valueOf(1);
             }
             wheel.rotateWheelTo(Integer.parseInt(points));
         });

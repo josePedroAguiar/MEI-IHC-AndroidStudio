@@ -1,62 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--Relative Layout-->
+<?xml version="1.0" encoding="utf-8"?><!--Relative Layout-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.ProfileFragment"
-    android:id="@+id/relativelayout"
-    >
+    android:id="@+id/relativelayout">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <!--Recycler View widget-->
-
-
-    <ImageView
-        android:id="@+id/foto"
-        android:layout_width="match_parent"
-        android:layout_height="635dp"
-        android:layout_marginTop="-70dp"
-        android:background="#E6E6E6"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/img" />
-
-        <TextView
-        android:layout_width="270dp"
-        android:layout_height="50dp"
-        android:layout_alignBottom="@+id/foto"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/name"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        />
-
-    <Button
-        android:id="@+id/button_first"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/foto"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-25dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/edit"
-        app:layout_constraintStart_toEndOf="parent" />
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Recycler View widget-->
 
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/foto"
+                android:layout_width="match_parent"
+                android:layout_height="635dp"
+                android:layout_marginTop="-70dp"
+                android:background="#E6E6E6"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/hassan_khan_egvccebwodm_unsplash" />
+
+            <TextView
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                android:layout_alignBottom="@+id/foto"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="40dp"
+                android:text="@string/name"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foto"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-25dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/edit"
+                app:layout_constraintStart_toEndOf="parent" />
+
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="342dp"
             android:layout_height="292dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginBottom="-3dp"
             android:text="asdasdasdjldhwqjekw
 qeq
@@ -85,9 +85,9 @@ bjkkjbjkbjkn
 
 "
             android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textSize="24sp"
 
 
-            ></TextView>
+            />
     </LinearLayout>
 </ScrollView>
