@@ -19,4 +19,22 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_profile2">Profile2</string>
+    <string name="spin">SPIN</string>
+    <string name="action_sign_in_short">SignIn</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_name">Name</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_click_here">Don\'t have an account? Click here</string>
+    <string name="todo">TODO</string>
+
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="logo_string">Logo</string>
+    <string name="username_string">Username</string>
+    <string name="password_string">Password</string>
+    <string name="login_ek3_string">LOGIN</string>
+    <string name="login_ek4_string">LOGIN</string>
+    <string name="title_matches">Matches</string>
+    <string name="already_have_an_account_click_here">Already have an account? Click here</string>
 </resources>

@@ -29,9 +29,10 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     LuckyWheel wheel;
-    List<WheelItem> wheelItemList=new ArrayList<>();
+    List<WheelItem> wheelItemList = new ArrayList<>();
     String points;
-    public static int time=0;
+    public static int time = 0;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -39,8 +40,6 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-
 
         wheel = binding.luckywheel;
         wheel.setRotation(-90);
@@ -67,17 +66,14 @@ public class HomeFragment extends Fragment {
         WheelItem whellItem6 = new WheelItem(ResourcesCompat.getColor(
                 getResources(), R.color.teal_200, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
         wheelItemList.add(whellItem6);
-        if(time<1){
-        wheel.addWheelItems(wheelItemList);
+        if (time < 1) {
+            wheel.addWheelItems(wheelItemList);
             time++;
         }
 
-        wheel.setLuckyWheelReachTheTarget(new OnLuckyWheelReachTheTarget() {
-            @Override
-            public void onReachTarget() {
-                Intent i = new Intent(getActivity(), Match.class);
-                startActivity(i);
-            }
+        wheel.setLuckyWheelReachTheTarget(() -> {
+            Intent i = new Intent(getActivity(), Match.class);
+            startActivity(i);
         });
         LuckyWheel a = binding.luckywheel;
         a.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +86,9 @@ public class HomeFragment extends Fragment {
     }
             wheel.rotateWheelTo(Integer.parseInt(points));
             }
+            wheel.rotateWheelTo(Integer.parseInt(points));
         });
-        return  root;
+        return root;
     }
 }
 

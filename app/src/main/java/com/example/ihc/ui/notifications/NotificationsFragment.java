@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,8 +22,8 @@ import java.util.Arrays;
 public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-    ArrayList <String> nomes = new ArrayList (Arrays.asList(new String[]{"Miguel", "Tiago", "José", "Pedro", "Tomás"}));
-    ArrayList <String> subitems = new ArrayList (Arrays.asList(new String[]{"Miguel", "Tiago", "José", "Pedro", "Tomás"}));
+    ArrayList <String> nomes = new ArrayList<> (Arrays.asList("Miguel", "Tiago", "José", "Pedro", "Tomás"));
+    ArrayList <String> subitems = new ArrayList<> (Arrays.asList("Miguel", "Tiago", "José", "Pedro", "Tomás"));
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel =
@@ -33,11 +32,7 @@ public class NotificationsFragment extends Fragment {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
-
-
         ///
-
 
         String[] name = {"Christopher","Craig","Sergio","Mubariz","Mike","Michael","Toa","Ivana","Alex"};
         String[] lastMessage = {"Heye","Supp","Let's Catchup","Dinner tonight?","Gotta go",
@@ -56,7 +51,6 @@ public class NotificationsFragment extends Fragment {
 
         }
         ///
-
 
         ListAdapter adapter = new ListAdapter(getActivity(),userArrayList);
         //ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,R.id.text_view,nomes);
