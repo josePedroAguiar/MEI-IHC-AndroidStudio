@@ -66,7 +66,7 @@ public class NotificationsFragment extends Fragment {
         }
         ///
 
-
+        fetchUsers();
         ListAdapter adapter = new ListAdapter(getActivity(),userArrayList);
         //ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,R.id.text_view,nomes);
         ListView listView =  root.findViewById(R.id.mobile_list);

@@ -28,7 +28,6 @@ public class Match extends AppCompatActivity {
         binding = ActivityMatchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
 
 
     }

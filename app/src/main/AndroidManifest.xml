@@ -37,21 +37,17 @@
         </activity>
         <activity
             android:name=".ui.matches.MatchActivity"
-            android:exported="false"
-            android:label="@string/title_activity_match"
-            android:theme="@style/Theme.IHC.NoActionBar">
+            android:label="@string/title_activity_match">
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.matches.MatchActivity" />
         </activity>
         <activity
             android:name=".Match"
-            android:exported="false"
-            android:label="@string/title_activity_match"
-            android:theme="@style/Theme.IHC.NoActionBar">
+            android:label="@string/title_activity_match">
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".MainActivity"
