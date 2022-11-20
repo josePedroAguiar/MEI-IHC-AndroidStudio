@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "364017951203",
+    "firebase_url": "https://deitinder-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "deitinder",
+    "storage_bucket": "deitinder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364017951203:android:cad1a1d8abb8f0aca900d6",
+        "android_client_info": {
+          "package_name": "com.example.ihc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364017951203-kp7uhjg6l1n5ufbeefjppse59ard4gp3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs9E59D07rc8WSmwM4i-4DMYz01pf_KxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364017951203-kp7uhjg6l1n5ufbeefjppse59ard4gp3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

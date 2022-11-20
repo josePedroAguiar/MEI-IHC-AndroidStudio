@@ -2,6 +2,7 @@ package com.example.ihc.ui.notifications;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -19,6 +21,13 @@ import com.example.ihc.databinding.FragmentNotificationsBinding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class NotificationsFragment extends Fragment {
 
@@ -38,7 +47,7 @@ public class NotificationsFragment extends Fragment {
 
         ///
 
-
+        fetchUsers();
         String[] name = {"Christopher","Craig","Sergio","Mubariz","Mike","Michael","Toa","Ivana","Alex"};
         String[] lastMessage = {"Heye","Supp","Let's Catchup","Dinner tonight?","Gotta go",
                 "i'm in meeting","Gotcha","Let's Go","any Weekend Plans?"};
@@ -71,5 +80,21 @@ public class NotificationsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    private void fetchUsers() {
+        FirebaseFirestore.getInstance().collection("/users")
+        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    if (error != null) {
+                        Log.e("Teste", error.getMessage(), error);
+                        return;
+                    }
+                List<DocumentSnapshot> docs = value.getDocuments();
+                    for (DocumentSnapshot doc : docs) {
+                        User user = doc.toObject(User.class);
+                        Log.d("Teste", user.getName());
+                    }
+                }   });
     }
 }
