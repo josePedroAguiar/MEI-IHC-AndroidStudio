@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--  Single List Item Design -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".ui.notifications.NotificationsFragment" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:background="#242424">
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="16dp"
+            android:layout_width="255dp"
+            android:layout_height="50dp"
+            android:textSize="34sp"
+            android:textColor="#ffffff"
+            android:letterSpacing="0.02"
+            tools:text="Messages"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/mobile_list"
+        android:layout_width="395dp"
+        android:layout_height="545dp"></ListView>
+
+
+</LinearLayout>

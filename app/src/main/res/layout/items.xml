@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="85dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/items"
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@color/card_color">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginStart="83dp"
+                android:layout_marginTop="24dp"
+                android:id="@+id/personName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Christopher"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lastMessage"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginStart="83dp"
+                android:textColor="#8E8D8D"
+                android:layout_marginTop="47dp"
+                android:text="Hi, How Are you" />
+
+            <TextView
+                android:id="@+id/msgtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+
+                android:textColor="#8E8D8D"
+                android:layout_alignParentEnd="true"
+                android:text="8:35 pm" />
+
+        </RelativeLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/hassan_khan_egvccebwodm_unsplash" />
+
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
