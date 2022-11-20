@@ -8,19 +8,17 @@
         android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_match"
-        android:icon="@drawable/ic_outline_person_pin_circle_24"
+        android:icon="@drawable/placeholder__1__2"
         android:state_checked="true"
-
-        android:title="@string/title_home" />
+        android:title="@string/title_matches" />
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/_7_chat"
         android:title="@string/title_mensagem" />
 
-
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_baseline_person_24"
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ellipse_37"
         android:title="@string/title_profile" />
 
 </menu>
