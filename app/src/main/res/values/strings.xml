@@ -6,7 +6,6 @@
     <string name="title_activity_match">Match</string>
 
 
-
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -37,4 +36,5 @@
     <string name="login_ek4_string">LOGIN</string>
     <string name="title_matches">Matches</string>
     <string name="already_have_an_account_click_here">Already have an account? Click here</string>
+    <string name="spin_the_wheel">Spin the wheel!</string>
 </resources>

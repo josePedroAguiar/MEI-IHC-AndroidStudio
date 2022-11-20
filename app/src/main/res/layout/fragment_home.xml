@@ -6,15 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-
+    <TextView
+        android:id="@+id/spinText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/spin_the_wheel"
+        android:textColor="@color/white"
+        android:textSize="36sp" />
 
     <com.bluehomestudio.luckywheel.LuckyWheel
-        android:layout_marginTop="100dp"
+        android:id="@+id/luckywheel"
         android:layout_width="400dp"
         android:layout_height="400dp"
-        android:id="@+id/luckywheel">
-
-
-    </com.bluehomestudio.luckywheel.LuckyWheel>
+        android:layout_marginTop="200dp" />
 
 </RelativeLayout>
