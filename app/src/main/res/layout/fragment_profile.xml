@@ -17,7 +17,7 @@
         android:layout_height="635dp"
         android:layout_marginTop="-70dp"
         android:background="#E6E6E6"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/todo"
         android:src="@drawable/img" />
 
     <TextView
@@ -26,22 +26,20 @@
         android:layout_alignBottom="@+id/foto"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="40dp"
-
         android:text="@string/name"
         android:textSize="32sp"
         android:textStyle="bold"
-
-
         />
 
     <Button
         android:id="@+id/button_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/foto"
+        android:layout_below="@+id/foto"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="-25dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="3dp"
-        android:text="@string/edit" />
+        android:text="@string/edit"
+        app:layout_constraintStart_toEndOf="parent" />
 
 </RelativeLayout>

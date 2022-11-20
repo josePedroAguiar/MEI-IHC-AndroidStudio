@@ -2,6 +2,7 @@
   "project_info": {
     "project_number": "364017951203",
     "project_id": "deitinder",
+    "firebase_url": "https://deitinder-default-rtdb.europe-west1.firebasedatabase.app",
     "storage_bucket": "deitinder.appspot.com"
   },
   "client": [

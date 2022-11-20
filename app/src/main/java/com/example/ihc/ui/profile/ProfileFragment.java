@@ -14,6 +14,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.ihc.MainActivity;
 import com.example.ihc.R;
 import com.example.ihc.databinding.FragmentProfileBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileFragment extends Fragment {
 
@@ -22,12 +24,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+            Bundle savedInstanceState) {
 
-        binding =  FragmentProfileBinding.inflate(inflater, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                    Intent i = new Intent(getActivity(), Profile.class);
-                    startActivity(i);
+                Intent i = new Intent(getActivity(), Profile.class);
+                startActivity(i);
 
                 /*NavHostFragment.findNavController(ProfileFragment.this)
                         .navigate(R.id.action_First3Fragment_to_Second3Fragment);*/
