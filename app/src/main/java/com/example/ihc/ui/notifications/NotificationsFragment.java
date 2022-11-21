@@ -1,5 +1,7 @@
 package com.example.ihc.ui.notifications;
 
+import static com.example.ihc.MainActivity.userArrayList;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,8 +32,12 @@ import java.util.List;
 public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-    ArrayList <String> nomes = new ArrayList<> (Arrays.asList("Miguel", "Tiago", "José", "Pedro", "Tomás"));
-    ArrayList <String> subitems = new ArrayList<> (Arrays.asList("Miguel", "Tiago", "José", "Pedro", "Tomás"));
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel =
@@ -41,7 +47,7 @@ public class NotificationsFragment extends Fragment {
         View root = binding.getRoot();
 
         ///
-        fetchUsers();
+        //fetchUsers();
         String[] name = {"Christopher","Craig","Sergio","Mubariz","Mike","Michael","Toa","Ivana","Alex"};
         String[] lastMessage = {"Heye","Supp","Let's Catchup","Dinner tonight?","Gotta go",
                 "i'm in meeting","Gotcha","Let's Go","any Weekend Plans?"};
@@ -51,15 +57,16 @@ public class NotificationsFragment extends Fragment {
                 "9439043232","7534354323","6545543211","7654432343"};
         String[] country = {"United States","Russia","India","Israel","Germany","Thailand","Canada","France","Switzerland"};
 
-        ArrayList<User> userArrayList = new ArrayList<>();
+        /*fArrayList<User> userArrayList = new ArrayList<>();
         for(int i = 0;i<9;i++){
 
             User user = new User(name[i],lastMessage[i],lastmsgTime[i],phoneNo[i],country[i],0);
             userArrayList.add(user);
 
-        }
+        }*/
         ///
 
+        Log.d("------------->",Integer.toString(userArrayList.size()));
         ListAdapter adapter = new ListAdapter(getActivity(),userArrayList);
         //ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,R.id.text_view,nomes);
         ListView listView =  root.findViewById(R.id.mobile_list);
@@ -74,20 +81,5 @@ public class NotificationsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-    private void fetchUsers() {
-        FirebaseFirestore.getInstance().collection("/users")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error != null) {
-                            Log.e("Teste", error.getMessage(), error);
-                            return;
-                        }
-                        List<DocumentSnapshot> docs = value.getDocuments();
-                        for (DocumentSnapshot doc : docs) {
-                            User user = doc.toObject(User.class);
-                            Log.d("Teste", user.getName());
-                        }
-                    }   });
-    }
+
 }

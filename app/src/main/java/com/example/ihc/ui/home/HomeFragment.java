@@ -1,9 +1,12 @@
 package com.example.ihc.ui.home;
 
+import static com.example.ihc.MainActivity.userArrayList;
+
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,8 @@ import com.bluehomestudio.luckywheel.WheelItem;
 import com.example.ihc.Match;
 import com.example.ihc.R;
 import com.example.ihc.databinding.FragmentHomeBinding;
+import com.example.ihc.ui.notifications.User;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +51,23 @@ public class HomeFragment extends Fragment {
         ObjectAnimator animation = ObjectAnimator.ofFloat(wheel, "translationX", 550);
         animation.start();
 
+
+        int n_user=0;
+        Log.e("DEBUG",Integer.toString(userArrayList.size()));
+        for (User user : userArrayList){
+        if(n_user==0){
+            WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(
+                    getResources(), R.color.purple_500, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
+            wheelItemList.add(whellItem);
+        }
+        else {
+            WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(
+                    getResources(), R.color.purple_200, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
+            wheelItemList.add(whellItem);
+
+        }
+            n_user++;
+        }
         WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(
                 getResources(), R.color.purple_500, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
         wheelItemList.add(whellItem);
@@ -57,15 +79,6 @@ public class HomeFragment extends Fragment {
         wheelItemList.add(whellItem3);
         wheel.addWheelItems(wheelItemList);
         wheel = binding.luckywheel;
-        WheelItem whellItem4 = new WheelItem(ResourcesCompat.getColor(
-                getResources(), R.color.purple_500, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
-        wheelItemList.add(whellItem4);
-        WheelItem whellItem5 = new WheelItem(ResourcesCompat.getColor(
-                getResources(), R.color.purple_200, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
-        wheelItemList.add(whellItem5);
-        WheelItem whellItem6 = new WheelItem(ResourcesCompat.getColor(
-                getResources(), R.color.teal_200, null), BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
-        wheelItemList.add(whellItem6);
         if (time < 1) {
             wheel.addWheelItems(wheelItemList);
             time++;

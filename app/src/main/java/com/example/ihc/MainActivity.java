@@ -5,11 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.ihc.ui.notifications.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -24,14 +26,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     RecyclerView recyclerView;
-
+    public static ArrayList<User> userArrayList=new ArrayList<>();
     private static final String TAG = "MainActivity";
 
     // Array list for recycler view data source
@@ -50,9 +58,15 @@ public class MainActivity extends AppCompatActivity {
     int RecyclerViewItemPosition;*/
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        fetchUsers();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        fetchUsers();
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -215,6 +229,28 @@ public class MainActivity extends AppCompatActivity {
         // [START auth_sign_out]
         FirebaseAuth.getInstance().signOut();
         // [END auth_sign_out]
+    }
+
+    public void fetchUsers() {
+        FirebaseFirestore.getInstance().collection("/users")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            Log.e("Teste", error.getMessage(), error);
+
+                            return;
+                        }
+                        List<DocumentSnapshot> docs = value.getDocuments();
+                        userArrayList=new ArrayList<>();
+                        for (DocumentSnapshot doc : docs) {
+                            User user = doc.toObject(User.class);
+
+                            Log.d("- Teste ->",Integer.toString(userArrayList.size()));
+                            Log.d("Teste", user.getName());
+                            userArrayList.add(user);
+                        }
+                    }   });
     }
 
 }
