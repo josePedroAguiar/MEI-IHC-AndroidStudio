@@ -9,7 +9,6 @@
         android:id="@+id/navigation_home"
         android:name="com.example.ihc.ui.home.HomeFragment"
         android:label="@string/title_home"
-
         tools:layout="@layout/fragment_home" />
 
     <fragment
@@ -21,7 +20,7 @@
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.ihc.ui.notifications.NotificationsFragment"
-        android:label="@string/title_mensagem"
+        android:label="@string/title_message"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/navigation_match"

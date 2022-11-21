@@ -10,12 +10,33 @@
         android:id="@+id/spinText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="96dp"
         android:fontFamily="@font/inter_bold"
         android:gravity="center_horizontal"
         android:text="@string/spin_the_wheel"
         android:textColor="@color/white"
         android:textSize="36sp" />
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        app:mrl_rippleColor="#88FFFFFF"
+        app:mrl_rippleRoundedCorners="50dp"
+        app:mrl_rippleDuration="5"
+        app:mrl_rippleOverlay="true">
+
+        <ImageButton
+            android:id="@+id/settingsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/_63_settings_cog_outline__1__1" />
+    </com.balysv.materialripple.MaterialRippleLayout>
 
     <com.bluehomestudio.luckywheel.LuckyWheel
         android:id="@+id/luckywheel"

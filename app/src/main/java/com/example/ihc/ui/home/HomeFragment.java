@@ -2,11 +2,14 @@ package com.example.ihc.ui.home;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -30,6 +33,8 @@ public class HomeFragment extends Fragment {
 
     private final List<WheelItem> wheelItemList = new ArrayList<>();
     private String points;
+
+    private ImageButton settingsBtn;
     //public static int time = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +66,12 @@ public class HomeFragment extends Fragment {
             }
             wheel.rotateWheelTo(Integer.parseInt(points));
         });
+
+        settingsBtn = binding.settingsBtn;
+        settingsBtn.setOnClickListener(v -> {
+            Intent settings = new Intent(getActivity(), Settings.class);
+            //startActivity(settings);
+        });
         return root;
     }
 
@@ -84,6 +95,7 @@ public class HomeFragment extends Fragment {
                 BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
         wheelItemList.add(whellItem6);
     }
+
 }
 
 

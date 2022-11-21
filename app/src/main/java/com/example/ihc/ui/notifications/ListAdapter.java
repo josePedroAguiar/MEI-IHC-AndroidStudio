@@ -19,11 +19,8 @@ import java.util.ArrayList;
 
 public class ListAdapter extends ArrayAdapter<User> {
 
-
-    public ListAdapter(Context context, ArrayList<User> userArrayList){
-
-        super(context, R.layout.items,userArrayList);
-
+    public ListAdapter(Context context, ArrayList<User> userArrayList) {
+        super(context, R.layout.items, userArrayList);
     }
 
     @NonNull
@@ -31,10 +28,8 @@ public class ListAdapter extends ArrayAdapter<User> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         User user = getItem(position);
-        if (convertView == null){
-
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.items,parent,false);
-
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.items, parent, false);
         }
         //ImageView imageView = convertView.findViewById(R.id.profile_pic);
         TextView userName = convertView.findViewById(R.id.personName);
@@ -45,10 +40,6 @@ public class ListAdapter extends ArrayAdapter<User> {
         userName.setText(user.name);
         lastMsg.setText(user.lastMessage);
         time.setText(user.lastMsgTime);
-
-
-
-
 
         return convertView;
     }

@@ -1,11 +1,7 @@
 package com.example.ihc.data;
 
 public class User {
-    private String name;
-    private String email;
-    private String password;
-
-    public User() {}
+    private String name, email, password, photoUri, phoneNo;
 
     public User(String name, String email, String password) {
         this.name = name;
@@ -35,5 +31,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhotoUri() {
+        return photoUri;
+    }
+
+    public void setPhotoUri(String photoUri) {
+        this.photoUri = photoUri;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 }
