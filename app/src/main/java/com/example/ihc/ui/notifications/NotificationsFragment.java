@@ -8,17 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ihc.R;
 import com.example.ihc.databinding.FragmentNotificationsBinding;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.example.ihc.data.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,9 +47,8 @@ public class NotificationsFragment extends Fragment {
 
         ArrayList<User> userArrayList = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            User user = new User(name[i], lastMessage[i], lastmsgTime[i], phoneNo[i], country[i], 0);
+            User user = new User(name[i], phoneNo[i], country[i]);
             userArrayList.add(user);
-
         }
 
         fetchUsers();

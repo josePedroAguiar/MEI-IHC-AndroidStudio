@@ -18,9 +18,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bluehomestudio.luckywheel.LuckyWheel;
 import com.bluehomestudio.luckywheel.WheelItem;
+import com.example.ihc.Login;
 import com.example.ihc.Match;
 import com.example.ihc.R;
 import com.example.ihc.databinding.FragmentHomeBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ public class HomeFragment extends Fragment {
     private final List<WheelItem> wheelItemList = new ArrayList<>();
     private String points;
 
-    private ImageButton settingsBtn;
+    private ImageButton logoutBtn;
     //public static int time = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,10 +69,11 @@ public class HomeFragment extends Fragment {
             wheel.rotateWheelTo(Integer.parseInt(points));
         });
 
-        settingsBtn = binding.settingsBtn;
-        settingsBtn.setOnClickListener(v -> {
-            Intent settings = new Intent(getActivity(), Settings.class);
-            //startActivity(settings);
+        logoutBtn = binding.logoutBtn;
+        logoutBtn.setOnClickListener(v -> {
+            signOut();
+            Intent intent = new Intent(getActivity(), Login.class);
+            startActivity(intent);
         });
         return root;
     }
@@ -94,6 +97,12 @@ public class HomeFragment extends Fragment {
         WheelItem whellItem6 = new WheelItem(ResourcesCompat.getColor(getResources(), R.color.teal_200, null),
                 BitmapFactory.decodeResource(getResources(), R.drawable.test), "?");
         wheelItemList.add(whellItem6);
+    }
+
+    public void signOut() {
+        // [START auth_sign_out]
+        FirebaseAuth.getInstance().signOut();
+        // [END auth_sign_out]
     }
 
 }

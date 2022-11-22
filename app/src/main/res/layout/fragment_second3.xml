@@ -7,10 +7,18 @@
     android:background="@color/background"
     tools:context=".ui.profile.Second3Fragment">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/white"
+        android:gravity="center"
+        android:hint="@string/todo" />
+
     <TextView
         android:id="@+id/textview_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Nome:"
         app:layout_constraintBottom_toTopOf="@id/button_second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
