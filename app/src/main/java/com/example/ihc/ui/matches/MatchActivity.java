@@ -31,6 +31,7 @@ public class MatchActivity extends AppCompatActivity {
 
 
             binding.nameProfile.setText(name);
+            binding.nameProfile1.setText(name);
             binding.phoneProfile.setText(phone);
             binding.countryProfile.setText(country);
             binding.profileImage.setImageResource(imageid);

@@ -25,6 +25,7 @@ import com.bluehomestudio.luckywheel.WheelItem;
 import com.example.ihc.Match;
 import com.example.ihc.R;
 import com.example.ihc.databinding.FragmentHomeBinding;
+import com.example.ihc.ui.matches.MatchActivity;
 import com.example.ihc.ui.notifications.User;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -60,21 +61,25 @@ public class HomeFragment extends Fragment {
         generateWheelItems();
         wheel = binding.luckywheel;
         wheel.addWheelItems(wheelItemList);
-        wheel.setTarget(1);
+
 
         wheel.setRotation(-90);
         ObjectAnimator animation = ObjectAnimator.ofFloat(wheel, "translationX", 550);
         animation.start();
 
         wheel.setLuckyWheelReachTheTarget(() -> {
-            Intent i = new Intent(getActivity(), Match.class);
+            Intent i = new Intent(getActivity(), MatchActivity.class);
+            i.putExtra("name", userArrayList.get(Integer.parseInt(points)).getName());
+            i.putExtra("phone", userArrayList.get(Integer.parseInt(points)).getPhoneNo());
+            i.putExtra("country",userArrayList.get(Integer.parseInt(points)).getCountry());
             startActivity(i);
+
         });
 
         LuckyWheel a = binding.luckywheel;
         a.setOnClickListener(view -> {
             Random random = new Random();
-            points = String.valueOf(random.nextInt(10));
+            points = String.valueOf(random.nextInt(userArrayList.size()));
             if (points.equals("0")) {
                 points = String.valueOf(1);
             }
@@ -95,7 +100,8 @@ public class HomeFragment extends Fragment {
             if(i%2==0){
             WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(getResources(), R.color.purple_500, null),
                     BitmapFactory.decodeResource(getResources(), R.drawable.test), u.getName());
-            wheelItemList.add(whellItem);}
+            wheelItemList.add(whellItem);
+            }
             else{
                 WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(getResources(), R.color.purple_200, null),
                         BitmapFactory.decodeResource(getResources(), R.drawable.test), u.getName());

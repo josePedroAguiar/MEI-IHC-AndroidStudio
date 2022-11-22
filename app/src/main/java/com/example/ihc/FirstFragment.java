@@ -37,13 +37,6 @@ public class FirstFragment extends Fragment {
                 startActivity(i);
             }
         });
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), MainActivity.class);
-                startActivity(i);
-            }
-        });
     }
 
     @Override
