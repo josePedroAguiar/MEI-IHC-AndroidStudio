@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.ihc.EditProfile;
 import com.example.ihc.MainActivity;
 import com.example.ihc.R;
 import com.example.ihc.databinding.FragmentProfileBinding;
@@ -37,7 +38,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(getActivity(), Profile.class);
+                Intent i = new Intent(getActivity(), EditProfile.class);
                 startActivity(i);
 
                 /*NavHostFragment.findNavController(ProfileFragment.this)
