@@ -2,6 +2,7 @@ package com.example.ihc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Login extends AppCompatActivity {
 
@@ -52,13 +54,21 @@ public class Login extends AppCompatActivity {
         btn.setOnClickListener(view -> {
             final String em = email.getText().toString();
             final String pass = password.getText().toString();
+
+            if (TextUtils.isEmpty(em) || TextUtils.isEmpty(pass)) {
+                Log.w(TAG, "Email or Password empty!");
+                Toast.makeText(Login.this, "Email or Password empty!",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             mAuth.signInWithEmailAndPassword(em, pass).addOnCompleteListener(Login.this, task -> {
                 if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCustomToken:success");
-                    Toast.makeText(Login.this, "User logged in with success.",
-                            Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
+                    Log.d(TAG, "signInWithCustomToken:success");
+                    Toast.makeText(Login.this, "Logged in with success.",
+                            Toast.LENGTH_SHORT).show();
                     updateUI(user);
                 } else {
                     // If sign in fails, display a message to the user.
