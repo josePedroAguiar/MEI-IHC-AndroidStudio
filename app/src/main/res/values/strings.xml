@@ -39,4 +39,10 @@
     <string name="spin_the_wheel">Spin the wheel!</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="user_name">Name</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="age">Age</string>
+    <string name="bio">Bio</string>
+    <string name="cancel">Cancel</string>
+    <string name="city_country">City, Country</string>
 </resources>

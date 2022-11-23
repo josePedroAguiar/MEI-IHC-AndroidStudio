@@ -122,9 +122,9 @@ public class Register extends AppCompatActivity {
     // [END on_start_check_user]
 
     private void updateUI(FirebaseUser currentUser) {
-        FirebaseFirestore.getInstance().collection(USERS).add(user)
+        FirebaseFirestore.getInstance().collection(USERS).document(currentUser.getUid()).set(user)
                 .addOnSuccessListener(documentReference ->
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+                        Log.d(TAG, "User added with ID: " + currentUser.getUid()))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
 
         Intent intent = new Intent(Register.this, MainActivity.class);
