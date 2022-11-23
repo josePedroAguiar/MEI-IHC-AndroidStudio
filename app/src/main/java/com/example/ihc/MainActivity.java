@@ -210,10 +210,4 @@ public class MainActivity extends AppCompatActivity {
         // [END auth_email_cred]
     }
 
-    public void signOut() {
-        // [START auth_sign_out]
-        FirebaseAuth.getInstance().signOut();
-        // [END auth_sign_out]
-    }
-
 }

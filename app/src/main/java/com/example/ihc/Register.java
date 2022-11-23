@@ -9,13 +9,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ihc.data.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Register extends AppCompatActivity {
 
@@ -29,10 +34,8 @@ public class Register extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
     // [END declare_auth]
 
-    private FirebaseDatabase database;
-    private DatabaseReference mDB;
-    private static final String USER = "user";
     private User user;
+    private String USERS = "users";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +47,6 @@ public class Register extends AppCompatActivity {
         // [START initialize_auth]
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        mDB = database.getReference(USER);
 
         firebaseAuthStateListener = firebaseAuth -> {
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -72,7 +73,14 @@ public class Register extends AppCompatActivity {
                 return;
             }
 
-            user = new User(n, em, pass);
+            if (pass.length() < 6) {
+                Log.w(TAG, "Password needs 6 or more characters!");
+                Toast.makeText(Register.this, "Password needs 6 or more characters!",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            user = new User(n, em);
 
             mAuth.createUserWithEmailAndPassword(em, pass).addOnCompleteListener(Register.this, task -> {
                 if (task.isSuccessful()) {
@@ -83,7 +91,7 @@ public class Register extends AppCompatActivity {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCustomToken:failure", task.getException());
-                    Toast.makeText(Register.this, "Authentication failed.",
+                    Toast.makeText(Register.this, "User register failed.",
                             Toast.LENGTH_SHORT).show();
                 }
             });
@@ -114,10 +122,11 @@ public class Register extends AppCompatActivity {
     // [END on_start_check_user]
 
     private void updateUI(FirebaseUser currentUser) {
-        String keyId = mDB.getKey();
-        Toast.makeText(this, keyId, Toast.LENGTH_SHORT).show();
-        assert keyId != null;
-        mDB.child(keyId).setValue(user);
+        FirebaseFirestore.getInstance().collection(USERS).document(currentUser.getUid()).set(user)
+                .addOnSuccessListener(documentReference ->
+                        Log.d(TAG, "User added with ID: " + currentUser.getUid()))
+                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+
         Intent intent = new Intent(Register.this, MainActivity.class);
         startActivity(intent);
         finish();

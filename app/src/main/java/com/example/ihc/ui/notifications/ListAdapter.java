@@ -15,6 +15,8 @@ import com.example.ihc.R;
 
 import org.w3c.dom.Text;
 
+import com.example.ihc.data.User;
+
 import java.util.ArrayList;
 
 public class ListAdapter extends ArrayAdapter<User> {
@@ -37,9 +39,9 @@ public class ListAdapter extends ArrayAdapter<User> {
         TextView time = convertView.findViewById(R.id.msgtime);
 
         //imageView.setImageResource(user.imageId);
-        userName.setText(user.name);
-        lastMsg.setText(user.lastMessage);
-        time.setText(user.lastMsgTime);
+        userName.setText(user.getName());
+        lastMsg.setText("");
+        time.setText("");
 
         return convertView;
     }

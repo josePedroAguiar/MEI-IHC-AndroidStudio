@@ -30,12 +30,12 @@
         app:mrl_rippleOverlay="true">
 
         <ImageButton
-            android:id="@+id/settingsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/todo"
-            app:srcCompat="@drawable/_63_settings_cog_outline__1__1" />
+            android:id="@+id/logoutBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/power_off"
+            android:backgroundTint="@color/teal_700"
+            android:contentDescription="@string/todo" />
     </com.balysv.materialripple.MaterialRippleLayout>
 
     <com.bluehomestudio.luckywheel.LuckyWheel
