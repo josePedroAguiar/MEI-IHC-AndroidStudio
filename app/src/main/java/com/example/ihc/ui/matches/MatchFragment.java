@@ -5,15 +5,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ihc.R;
+import com.example.ihc.data.User;
 import com.example.ihc.databinding.FragmentMathesBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -43,8 +51,16 @@ public class MatchFragment extends Fragment {
         String[] country = {"United States", "Russia", "India", "Israel", "Germany", "Thailand", "Canada", "France", "Switzerland"};
 
         ArrayList<Match> userArrayList = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
 
+
+
+
+        for (int i = 0; i < 9; i++) {
+            //
+
+            //
+
+            //
             Match match = new Match(name[i], lastMessage[i], lastmsgTime[i], phoneNo[i], country[i], 0);
             userArrayList.add(match);
 
@@ -70,6 +86,22 @@ public class MatchFragment extends Fragment {
 
 
         return root;
+    }
+
+
+
+   static public User correntUser;
+   void getCurrentUser(){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        assert currentUser != null;
+        DocumentReference docRef =FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = documentSnapshot.toObject(User.class);
+                correntUser=user;
+            }}
+        );
     }
 }
 
