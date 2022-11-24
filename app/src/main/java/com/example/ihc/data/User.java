@@ -1,9 +1,21 @@
 package com.example.ihc.data;
 
+import java.util.ArrayList;
+
 public class User {
+    private String uuid;
     private String name, email, photoUri, phoneNo, country;
+    private ArrayList<String> matchesUUIDs;
 
     public User() {
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public ArrayList<String> getMatchesUUIDs() {
+        return matchesUUIDs;
     }
 
     public User(String name, String email) {

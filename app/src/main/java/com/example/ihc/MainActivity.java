@@ -13,6 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ihc.data.User;
 import com.example.ihc.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     private static final String TAG = "MainActivity";
-
+    public    static ArrayList<User> userArrayList;
     // Array list for recycler view data source
     ArrayList<String> source;
 

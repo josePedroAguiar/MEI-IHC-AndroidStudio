@@ -75,8 +75,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.profile.Profile" />
         </activity>
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -87,6 +86,12 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
+
         </activity>
 
         <!-- [START firebase_service] -->
