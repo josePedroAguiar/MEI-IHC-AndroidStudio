@@ -35,6 +35,7 @@ public class ListAdapterMatch extends ArrayAdapter<Match> {
         }
         //ImageView imageView = convertView.findViewById(R.id.profile_pic);
         TextView userName = convertView.findViewById(R.id.personName);
+        TextView bio = convertView.findViewById(R.id.bio);
         TextView lastMsg = convertView.findViewById(R.id.lastMessage);
         TextView time = convertView.findViewById(R.id.msgtime);
 

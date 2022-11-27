@@ -35,15 +35,16 @@ public class MatchActivity extends AppCompatActivity {
         if (intent != null) {
             String name = intent.getStringExtra("name");
             String phone = intent.getStringExtra("phone");
+            String bio = intent.getStringExtra("bio");
             String country = intent.getStringExtra("country");
             int imageid = intent.getIntExtra("imageid", R.drawable.ic_baseline_person_24);
 
             binding.nameProfile.setText(name);
+            binding.bio.setText(bio);
             binding.phoneProfile.setText(phone);
             binding.countryProfile.setText(country);
 
             Button btnNext = findViewById(R.id.btnNext);
-            btnNext.setBackgroundColor(R.color.teal_700);
             Button btnPrevious = findViewById(R.id.btnPrevious);
 
             ImageSwitcher imageSwitcher = findViewById(R.id.container_image); // get reference of ImageSwitcher

@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.bluehomestudio.luckywheel.LuckyWheel;
 import com.bluehomestudio.luckywheel.WheelItem;
 import com.example.ihc.Login;
 import com.example.ihc.R;
+import com.example.ihc.Register;
 import com.example.ihc.data.User;
 import com.example.ihc.databinding.FragmentHomeBinding;
 import com.example.ihc.ui.matches.MatchActivity;
@@ -43,6 +45,7 @@ public class HomeFragment extends Fragment {
 
     private final List<WheelItem> wheelItemList = new ArrayList<>();
     private String points;
+    private  int value;
 
     private ImageButton logoutBtn;
     //public static int time = 0;
@@ -53,34 +56,44 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        generateWheelItems();
-        wheel = binding.luckywheel;
-        wheel.addWheelItems(wheelItemList);
-        wheel.setTarget(1);
 
-        wheel.setRotation(-90);
-        ObjectAnimator animation = ObjectAnimator.ofFloat(wheel, "translationX", 550);
-        animation.start();
-
-        wheel.setLuckyWheelReachTheTarget(() -> {
-            updateMatches(userArrayList.get(Integer.parseInt(points)));
-            Intent i = new Intent(getActivity(), MatchActivity.class);
-            i.putExtra("name", userArrayList.get(Integer.parseInt(points)).getName());
-            i.putExtra("phone", userArrayList.get(Integer.parseInt(points)).getPhoneNo());
-            i.putExtra("country",userArrayList.get(Integer.parseInt(points)).getCountry());
-            startActivity(i);
-
-        });
-
-        LuckyWheel a = binding.luckywheel;
-        a.setOnClickListener(view -> {
-            Random random = new Random();
-            points = String.valueOf(random.nextInt(10));
-            if (points.equals("0")) {
-                points = String.valueOf(1);
+        if(userArrayList!=null) {
+            if(userArrayList.size()==0){
+                userArrayList.add(new User());
             }
-            wheel.rotateWheelTo(Integer.parseInt(points));
-        });
+            if(wheelItemList.size()<userArrayList.size())
+            generateWheelItems();
+            wheel = binding.luckywheel;
+            wheel.addWheelItems(wheelItemList);
+
+            wheel.setRotation(-90);
+            ObjectAnimator animation = ObjectAnimator.ofFloat(wheel, "translationX", 550);
+            animation.start();
+
+
+            LuckyWheel a = binding.luckywheel;
+
+            a.setOnClickListener(view -> {
+                Random random = new Random();
+                value=random.nextInt(userArrayList.size());
+                points = String.valueOf(value);
+                Toast.makeText(getActivity(),points,Toast.LENGTH_SHORT).show();
+                wheel.rotateWheelTo(value+1);
+            });
+            wheel.setLuckyWheelReachTheTarget(() -> {
+                updateMatches(userArrayList.get(value));
+                Intent i = new Intent(getActivity(), MatchActivity.class);
+                points = String.valueOf(value);
+                Log.e("ERR0 ",points);
+                i.putExtra("name", userArrayList.get(value).getName());
+                i.putExtra("bio", "ola");
+                i.putExtra("country", userArrayList.get(value).getCountry());
+                startActivity(i);
+
+            });
+
+
+        }
 
         logoutBtn = binding.logoutBtn;
         logoutBtn.setOnClickListener(v -> {
@@ -156,10 +169,11 @@ public class HomeFragment extends Fragment {
                 });
     }
     void updateMatches(@NonNull User user){
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        assert currentUser != null;
+        /*FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.e("DEBUG","aaaaa");
         DocumentReference washingtonRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
-        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
+        //washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
+        washingtonRef.update("matches", FieldValue.arrayUnion("lalalalala"));*/
     }
 
 

@@ -3,8 +3,10 @@ package com.example.ihc.data;
 import java.util.ArrayList;
 
 public class User {
+
+
     private String uuid;
-    private String name, email, photoUri, phoneNo, country;
+    private String name, email, photoUri, country;
     private ArrayList<String> matchesUUIDs;
 
     public User() {
@@ -25,7 +27,6 @@ public class User {
 
     public User(String name, String phoneNo, String country) {
         this.name = name;
-        this.phoneNo = phoneNo;
         this.country = country;
     }
 
@@ -53,13 +54,6 @@ public class User {
         this.photoUri = photoUri;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
 
     public String getCountry() {
         return country;
@@ -67,5 +61,9 @@ public class User {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

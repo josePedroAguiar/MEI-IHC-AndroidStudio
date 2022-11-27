@@ -77,6 +77,7 @@ public class MatchFragment extends Fragment {
 
             Intent i = new Intent(getActivity(), MatchActivity.class);
             i.putExtra("name", name[position]);
+            i.putExtra("bio", name[position]);
             i.putExtra("phone", phoneNo[position]);
             i.putExtra("country", country[position]);
             //i.putExtra("imageid",imageId[position]);

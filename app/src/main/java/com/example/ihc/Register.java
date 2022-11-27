@@ -122,6 +122,7 @@ public class Register extends AppCompatActivity {
     // [END on_start_check_user]
 
     private void updateUI(FirebaseUser currentUser) {
+        user.setUuid(currentUser.getUid());
         FirebaseFirestore.getInstance().collection(USERS).document(currentUser.getUid()).set(user)
                 .addOnSuccessListener(documentReference ->
                         Log.d(TAG, "User added with ID: " + currentUser.getUid()))
