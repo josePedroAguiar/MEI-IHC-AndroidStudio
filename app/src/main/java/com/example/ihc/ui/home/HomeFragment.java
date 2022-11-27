@@ -169,11 +169,11 @@ public class HomeFragment extends Fragment {
                 });
     }
     void updateMatches(@NonNull User user){
-        /*FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.e("DEBUG","aaaaa");
         DocumentReference washingtonRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
         //washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
-        washingtonRef.update("matches", FieldValue.arrayUnion("lalalalala"));*/
+        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
     }
 
 

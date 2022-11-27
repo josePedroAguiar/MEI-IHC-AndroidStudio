@@ -2,10 +2,12 @@ package com.example.ihc.ui.matches;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.ihc.R;
 import com.example.ihc.data.User;
 import com.example.ihc.databinding.FragmentMathesBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,12 +27,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MatchFragment extends Fragment {
 
     private FragmentMathesBinding binding;
     public static int time = 0;
-
+    public static ArrayList<User> userMatches=new ArrayList<>();
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         MatchViewModel homeViewModel =
@@ -53,15 +57,14 @@ public class MatchFragment extends Fragment {
         ArrayList<Match> userArrayList = new ArrayList<>();
 
 
-
-
-        for (int i = 0; i < 9; i++) {
+        Log.e("wewe",Integer.toString(userMatches.size()));
+        for (User user:userMatches) {
             //
 
             //
 
             //
-            Match match = new Match(name[i], lastMessage[i], lastmsgTime[i], phoneNo[i], country[i], 0);
+            Match match = new Match(user.getName(), user.getCountry(), user.getUuid(), user.getPhotoUri(), user.getCountry(), 0);
             userArrayList.add(match);
 
         }
@@ -76,10 +79,10 @@ public class MatchFragment extends Fragment {
         listView.setOnItemClickListener((parent, view, position, id) -> {
 
             Intent i = new Intent(getActivity(), MatchActivity.class);
-            i.putExtra("name", name[position]);
-            i.putExtra("bio", name[position]);
-            i.putExtra("phone", phoneNo[position]);
-            i.putExtra("country", country[position]);
+            i.putExtra("name", userMatches.get(position).getName());
+            i.putExtra("bio", userMatches.get(position).getName());
+            i.putExtra("phone", userMatches.get(position).getPhotoUri());
+            i.putExtra("country", userMatches.get(position).getCountry());
             //i.putExtra("imageid",imageId[position]);
             startActivity(i);
 
@@ -91,19 +94,8 @@ public class MatchFragment extends Fragment {
 
 
 
-   static public User correntUser;
-   void getCurrentUser(){
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        assert currentUser != null;
-        DocumentReference docRef =FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user = documentSnapshot.toObject(User.class);
-                correntUser=user;
-            }}
-        );
-    }
+
+
 }
 
 

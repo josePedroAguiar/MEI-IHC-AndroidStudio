@@ -7,9 +7,19 @@ public class User {
 
     private String uuid;
     private String name, email, photoUri, country;
-    private ArrayList<String> matchesUUIDs;
+    private ArrayList<String> matchesUUIDs=new ArrayList<>();
 
     public User() {
+        matchesUUIDs=new ArrayList<>();
+    }
+
+    public User(String uuid, String name, String email, String photoUri, String country, ArrayList<String> matchesUUIDs) {
+        this.uuid = uuid;
+        this.name = name;
+        this.email = email;
+        this.photoUri = photoUri;
+        this.country = country;
+        this.matchesUUIDs = matchesUUIDs;
     }
 
     public String getUuid() {
