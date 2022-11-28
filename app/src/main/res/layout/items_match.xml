@@ -64,6 +64,8 @@
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="18dp"
+
+            android:id="@+id/image"
             android:src="@drawable/hassan_khan_egvccebwodm_unsplash" />
 
     </androidx.cardview.widget.CardView>

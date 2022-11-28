@@ -6,20 +6,24 @@ public class User {
 
 
     private String uuid;
-    private String name, email, photoUri, country;
-    private ArrayList<String> matchesUUIDs=new ArrayList<>();
+    private  ArrayList<String> photosUri=new ArrayList<>();
+    private String photoUri,bio,name, email, country;
+    private ArrayList<String> matches=new ArrayList<>();
 
     public User() {
-        matchesUUIDs=new ArrayList<>();
+        matches=new ArrayList<>();
     }
 
-    public User(String uuid, String name, String email, String photoUri, String country, ArrayList<String> matchesUUIDs) {
-        this.uuid = uuid;
-        this.name = name;
-        this.email = email;
-        this.photoUri = photoUri;
-        this.country = country;
-        this.matchesUUIDs = matchesUUIDs;
+    public ArrayList<String> getPhotosUri() {
+        return photosUri;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public String getUuid() {
@@ -27,7 +31,7 @@ public class User {
     }
 
     public ArrayList<String> getMatchesUUIDs() {
-        return matchesUUIDs;
+        return matches;
     }
 
     public User(String name, String email) {

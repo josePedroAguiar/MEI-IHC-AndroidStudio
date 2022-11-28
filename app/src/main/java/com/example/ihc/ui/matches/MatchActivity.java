@@ -2,30 +2,30 @@ package com.example.ihc.ui.matches;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ViewSwitcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ihc.R;
 import com.example.ihc.databinding.ActivityMatchBinding;
+import com.squareup.picasso.Picasso;
 
 public class MatchActivity extends AppCompatActivity {
 
     ActivityMatchBinding binding;
-    int[] imageIds = {R.drawable.austin_wade_x6uj51n5ce8_unsplash, R.drawable.hassan_khan_egvccebwodm_unsplash};
-    int count = imageIds.length;
+
     // to keep current Index of ImageID array
     int currentIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int[] imageIds = {R.drawable.austin_wade_x6uj51n5ce8_unsplash, R.drawable.hassan_khan_egvccebwodm_unsplash};
+        int count = imageIds.length;
         super.onCreate(savedInstanceState);
         binding = ActivityMatchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -36,6 +36,7 @@ public class MatchActivity extends AppCompatActivity {
             String name = intent.getStringExtra("name");
             String phone = intent.getStringExtra("phone");
             String bio = intent.getStringExtra("bio");
+            String link = intent.getStringExtra("link");
             String country = intent.getStringExtra("country");
             int imageid = intent.getIntExtra("imageid", R.drawable.ic_baseline_person_24);
 
@@ -61,7 +62,8 @@ public class MatchActivity extends AppCompatActivity {
             });
 
             imageSwitcher.setImageResource(imageid); // set the image in ImageSwitcher
-
+            ImageView i= binding.image;
+            Picasso.get().load(link).into(i);
             // Declare in and out animations and load them using AnimationUtils class
             Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
             Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);

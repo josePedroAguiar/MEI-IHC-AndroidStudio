@@ -19,6 +19,12 @@
                 android:id="@+id/container_image"
                 android:layout_width="match_parent"
                 android:layout_height="600dp" />
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="600dp"></ImageView>
+
+
 
             <Button
                 android:id="@+id/btnNext"

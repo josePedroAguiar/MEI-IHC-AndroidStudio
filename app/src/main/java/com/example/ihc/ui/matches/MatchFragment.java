@@ -64,7 +64,8 @@ public class MatchFragment extends Fragment {
             //
 
             //
-            Match match = new Match(user.getName(), user.getCountry(), user.getUuid(), user.getPhotoUri(), user.getCountry(), 0);
+
+            Match match = new Match(user.getName(), user.getCountry(), user.getUuid(), user.getPhotoUri(), user.getCountry(), user.getPhotoUri());
             userArrayList.add(match);
 
         }
@@ -83,7 +84,7 @@ public class MatchFragment extends Fragment {
             i.putExtra("bio", userMatches.get(position).getName());
             i.putExtra("phone", userMatches.get(position).getPhotoUri());
             i.putExtra("country", userMatches.get(position).getCountry());
-            //i.putExtra("imageid",imageId[position]);
+            i.putExtra("link",userMatches.get(position).getPhotoUri());
             startActivity(i);
 
         });

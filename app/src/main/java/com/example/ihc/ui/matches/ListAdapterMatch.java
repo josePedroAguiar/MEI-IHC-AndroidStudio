@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +46,15 @@ public class ListAdapterMatch extends ArrayAdapter<Match> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.items_match,parent,false);
 
         }
-        //ImageView imageView = convertView.findViewById(R.id.profile_pic);
+        ImageView imageView = convertView.findViewById(R.id.image);
         TextView userName = convertView.findViewById(R.id.personName);
+
         TextView bio = convertView.findViewById(R.id.bio);
         TextView lastMsg = convertView.findViewById(R.id.lastMessage);
         TextView time = convertView.findViewById(R.id.msgtime);
 
-        //imageView.setImageResource(user.imageId);
+        if(match.imageId!=null)
+            Picasso.get().load(match.imageId).into(imageView);
         userName.setText(match.name);
         lastMsg.setText(match.lastMessage);
         time.setText(match.lastMsgTime);
