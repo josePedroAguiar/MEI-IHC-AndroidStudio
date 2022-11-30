@@ -103,27 +103,17 @@ public class MatchActivity extends AppCompatActivity {
                     currentIndex = count - 1;
                 imageSwitcher.setImageResource(imageIds[currentIndex]); // set the image in ImageSwitcher
             });
-
-
-            btnMessage.setOnClickListener(v -> {
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(v.getContext(), ChatActivity.class);
-                        i.putExtra("id", id);
-                        startActivity(i);
-                    }
-                };
-            });
-
-        }
-
-            Button b = findViewById(R.id.button_first);
+            
+            Button b = findViewById(R.id.button_message);
             b.setOnClickListener(v -> {
                 Intent i = new Intent(this, ChatActivity.class);
-                i.putExtra("name", name);
+                i.putExtra("id", id);
                 startActivity(i);
             });
+
         }
+
+
+
     }
 }
