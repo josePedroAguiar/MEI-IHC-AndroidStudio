@@ -119,10 +119,14 @@ public class Splash extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     DocumentSnapshot document = task.getResult();
                                     List<String> group = (List<String>) document.get("matches");
+                                   if(group!=null){
                                     for (String a : group) {
+                                        if(a!=null){
                                         String array[]=a.split("@");
                                         getUser(array[0],array[1],array[2]);
+                                        }
                                     }
+                                   }
 
 
                                 }

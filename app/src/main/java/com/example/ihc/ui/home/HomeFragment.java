@@ -1,6 +1,8 @@
 package com.example.ihc.ui.home;
 
+import static com.example.ihc.MainActivity.locationsMatches;
 import static com.example.ihc.MainActivity.userArrayList;
+import static com.example.ihc.ui.matches.MatchFragment.userMatches;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -23,18 +25,25 @@ import com.bluehomestudio.luckywheel.WheelItem;
 import com.example.ihc.Login;
 import com.example.ihc.R;
 import com.example.ihc.Register;
+import com.example.ihc.Splash;
+import com.example.ihc.data.Route;
 import com.example.ihc.data.User;
 import com.example.ihc.databinding.FragmentHomeBinding;
 import com.example.ihc.ui.matches.MatchActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -170,11 +179,85 @@ public class HomeFragment extends Fragment {
                 });
     }
     void updateMatches(@NonNull User user){
+        Intent i = new Intent(getActivity(), Splash.class);
+        startActivity(i);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.e("DEBUG","aaaaa");
         DocumentReference washingtonRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
         //washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
-        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
+        Random random = new Random();
+        Integer map=random.nextInt(4);
+        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+map+"@"+(locationsMatches.size()+1)));
+    }
+    boolean getUser(String uuid,String local,String pos){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser!=null) {
+            DocumentReference docRef =FirebaseFirestore.getInstance().collection("/users").document(uuid);
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                  @Override
+                                                  public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                      User user  = documentSnapshot.toObject(User.class);
+                                                      if(user.getUuid().compareTo(currentUser.getUid())!=0){
+                                                          user.setOrder(Integer.parseInt(pos));
+                                                          userMatches.add(user);
+                                                          Collections.sort(userMatches, new Comparator<User>() {
+                                                              @Override
+                                                              public int compare(User a1, User a2) {
+                                                                  return a1.getOrder() - a2.getOrder();
+                                                              }
+                                                          });
+                                                          getLoctions(local,pos);
+                                                          Log.e(":(",Integer.toString(user.getOrder()));
+
+                                                      }
+
+
+                                                  }
+                                              }
+            );
+        }
+        return false;
+
+    }
+    void getMatches() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser!=null) {
+            Log.e("DEBUG", "aaaaa");
+            FirebaseFirestore.getInstance().collection("/users")
+                    .document(currentUser.getUid()).get()
+                    .addOnCompleteListener(
+                            new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    List<String> group = (List<String>) document.get("matches");
+                                    for (String a : group) {
+                                        String array[]=a.split("@");
+                                        getUser(array[0],array[1],array[2]);
+                                    }
+
+
+                                }
+                            });
+        }
+    }
+    void getLoctions(String uuid,String pos){
+        DocumentReference docRef =FirebaseFirestore.getInstance().collection("/locations").document(uuid);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Route route  = documentSnapshot.toObject(Route.class);
+                route.setOrder(Integer.parseInt(pos));
+                locationsMatches.add(route);
+                Collections.sort(locationsMatches, new Comparator<Route>() {
+                    @Override
+                    public int compare(Route a1, Route a2) {
+                        return a1.getOrder() - a2.getOrder();
+                    }
+                });
+
+            }}
+        );
     }
 
 
