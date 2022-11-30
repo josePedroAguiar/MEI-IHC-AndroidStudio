@@ -72,9 +72,9 @@ public class MatchActivity extends AppCompatActivity {
             });
 
             imageSwitcher.setImageResource(imageid); // set the image in ImageSwitcher
-            ImageView user= binding.image;
+            ImageView user = binding.image;
             Picasso.get().load(link).into(user);
-            ImageView map= binding.map;
+            ImageView map = binding.map;
             Picasso.get().load(link_map).into(map);
             // Declare in and out animations and load them using AnimationUtils class
             Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
@@ -118,5 +118,12 @@ public class MatchActivity extends AppCompatActivity {
 
         }
 
+            Button b = findViewById(R.id.button_first);
+            b.setOnClickListener(v -> {
+                Intent i = new Intent(this, ChatActivity.class);
+                i.putExtra("name", name);
+                startActivity(i);
+            });
+        }
     }
 }

@@ -95,6 +95,7 @@ public class HomeFragment extends Fragment {
                 points = String.valueOf(value);
                 Log.e("ERR0 ",points);
                 i.putExtra("name", userArrayList.get(value).getName());
+                i.putExtra("uuid", userArrayList.get(value).getUuid());
                 i.putExtra("bio", "ola");
                 i.putExtra("country", userArrayList.get(value).getCountry());
                 i.putExtra("link",userArrayList.get(value).getPhotoUri());

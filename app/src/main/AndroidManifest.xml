@@ -95,8 +95,13 @@
         </activity>
 
         <!-- [START firebase_service] -->
+        <activity
+            android:name=".ui.notifications.ChatActivity"
+            android:exported="false">
+
+        </activity>
         <service
-            android:name=".Messaging"
+            android:name=".ui.notifications.ChatActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
