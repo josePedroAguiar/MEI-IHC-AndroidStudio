@@ -6,17 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.ihc.R;
+import com.example.ihc.databinding.ActivityChatBinding;
 import com.example.ihc.databinding.ActivityMatchBinding;
 
 public class ChatActivity extends AppCompatActivity {
 
+    private ActivityChatBinding binding;
     //Activity binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //binding = ActivityMatchBinding.inflate(getLayoutInflater());
-
+        binding = ActivityChatBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
     }
 }

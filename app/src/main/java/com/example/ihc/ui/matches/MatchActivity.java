@@ -1,7 +1,10 @@
 package com.example.ihc.ui.matches;
 
+import static com.example.ihc.MainActivity.locationsMatches;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -13,7 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ihc.R;
 import com.example.ihc.databinding.ActivityMatchBinding;
+import com.example.ihc.ui.notifications.ChatActivity;
 import com.squareup.picasso.Picasso;
+
+import com.example.ihc.ui.notifications.ChatActivity;
+
 
 public class MatchActivity extends AppCompatActivity {
 
@@ -39,6 +46,7 @@ public class MatchActivity extends AppCompatActivity {
             String link = intent.getStringExtra("link");
             String link_map = intent.getStringExtra("link_map");
             String country = intent.getStringExtra("country");
+            String id = intent.getStringExtra("id");
             int imageid = intent.getIntExtra("imageid", R.drawable.ic_baseline_person_24);
 
             binding.nameProfile.setText(name);
@@ -48,6 +56,7 @@ public class MatchActivity extends AppCompatActivity {
 
             Button btnNext = findViewById(R.id.btnNext);
             Button btnPrevious = findViewById(R.id.btnPrevious);
+            Button btnMessage = findViewById(R.id.button_message);
 
             ImageSwitcher imageSwitcher = findViewById(R.id.container_image); // get reference of ImageSwitcher
 
@@ -94,6 +103,19 @@ public class MatchActivity extends AppCompatActivity {
                     currentIndex = count - 1;
                 imageSwitcher.setImageResource(imageIds[currentIndex]); // set the image in ImageSwitcher
             });
+
+
+            btnMessage.setOnClickListener(v -> {
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(v.getContext(), ChatActivity.class);
+                        i.putExtra("id", id);
+                        startActivity(i);
+                    }
+                };
+            });
+
         }
 
     }

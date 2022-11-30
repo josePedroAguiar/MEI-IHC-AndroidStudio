@@ -98,6 +98,7 @@ public class HomeFragment extends Fragment {
                 i.putExtra("bio", "ola");
                 i.putExtra("country", userArrayList.get(value).getCountry());
                 i.putExtra("link",userArrayList.get(value).getPhotoUri());
+                i.putExtra("id", userArrayList.get(value).getUuid());
                 startActivity(i);
 
             });
