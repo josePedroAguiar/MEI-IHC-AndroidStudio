@@ -120,7 +120,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/phone_profile"
+                        android:id="@+id/age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="25"

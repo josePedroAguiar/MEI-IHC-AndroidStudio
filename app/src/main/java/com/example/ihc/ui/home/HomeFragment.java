@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment {
                 userArrayList.add(new User());
             }
             if(wheelItemList.size()<userArrayList.size())
-            generateWheelItems();
+                generateWheelItems();
             wheel = binding.luckywheel;
             wheel.addWheelItems(wheelItemList);
 
@@ -95,11 +95,16 @@ public class HomeFragment extends Fragment {
                 points = String.valueOf(value);
                 Log.e("ERR0 ",points);
                 i.putExtra("name", userArrayList.get(value).getName());
-                i.putExtra("uuid", userArrayList.get(value).getUuid());
-                i.putExtra("bio", "ola");
-                i.putExtra("country", userArrayList.get(value).getCountry());
-                i.putExtra("link",userArrayList.get(value).getPhotoUri());
-                i.putExtra("id", userArrayList.get(value).getUuid());
+                if(userArrayList.get(value).getUuid()!=null)
+                    i.putExtra("uuid", userArrayList.get(value).getUuid());
+                if(userArrayList.get(value).getBio()!=null)
+                    i.putExtra("bio",  userArrayList.get(value).getBio());
+                if(userArrayList.get(value).getCountry()!=null)
+                    i.putExtra("country", userArrayList.get(value).getCountry());
+                if(userArrayList.get(value).getPhotoUri()!=null)
+                    i.putExtra("link",userArrayList.get(value).getPhotoUri());
+                if(userArrayList.get(value).getUuid()!=null)
+                    i.putExtra("id", userArrayList.get(value).getUuid());
                 startActivity(i);
 
             });

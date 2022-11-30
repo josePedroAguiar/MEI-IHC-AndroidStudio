@@ -8,7 +8,8 @@ public class User {
     private String uuid;
     private  int order;
     //private  ArrayList<String> photosUri=new ArrayList<>();
-    private String photoUri,bio,name, email, country;
+    private String photoUri,bio,name,age, email, country;
+
     private ArrayList<String> matchesUiid=new ArrayList<>();
 
     public User() {
@@ -88,5 +89,13 @@ public class User {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 }

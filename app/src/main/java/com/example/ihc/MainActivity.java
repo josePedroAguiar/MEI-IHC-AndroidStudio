@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     public    static ArrayList<User> userArrayList;
     public    static ArrayList<Route> locationsMatches;
     // Array list for recycler view data source
-    ArrayList<String> source;
 
     // Layout Manager
     RecyclerView.LayoutManager RecyclerViewLayoutManager;

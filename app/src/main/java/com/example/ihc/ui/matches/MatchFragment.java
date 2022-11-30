@@ -68,7 +68,7 @@ public class MatchFragment extends Fragment {
             //
 
             //
-            Match match = new Match(user.getName(), locationsMatches.get(pos).getImage(), user.getUuid(), user.getPhotoUri(), user.getCountry(), user.getPhotoUri());
+            Match match = new Match(user.getName(), locationsMatches.get(pos).getImage(), user.getAge(), user.getPhotoUri(), user.getCountry(), user.getPhotoUri());
             userArrayList.add(match);
             pos++;
 
@@ -85,9 +85,11 @@ public class MatchFragment extends Fragment {
 
             Intent i = new Intent(getActivity(), MatchActivity.class);
             i.putExtra("name", userMatches.get(position).getName());
-            i.putExtra("bio", userMatches.get(position).getName());
+            i.putExtra("bio", userMatches.get(position).getBio());
+            i.putExtra("age", userMatches.get(position).getAge());
             i.putExtra("phone", userMatches.get(position).getPhotoUri());
             i.putExtra("country", userMatches.get(position).getCountry());
+
             i.putExtra("link",userMatches.get(position).getPhotoUri());
             i.putExtra("link_map",locationsMatches.get(position).getImage());
             startActivity(i);

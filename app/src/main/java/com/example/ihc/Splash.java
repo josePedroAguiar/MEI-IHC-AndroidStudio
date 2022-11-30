@@ -41,6 +41,7 @@ public class Splash extends AppCompatActivity {
             setContentView(R.layout.activity_slash);
             userArrayList=new ArrayList<>();
             locationsMatches=new ArrayList<>();
+             userMatches=new ArrayList<>();
             getMatches();
 
 
@@ -72,7 +73,7 @@ public class Splash extends AppCompatActivity {
                         assert user != null;
                         Log.d("Teste", user.getName());
                         if(user.getUuid()!=null&&user.getUuid().compareTo(currentUser.getUid())!=0)
-                        userArrayList.add(user);
+                            userArrayList.add(user);
                         //Log.e("DEBUG-1",userArrayList.size()+"");
                     }
                 });}
