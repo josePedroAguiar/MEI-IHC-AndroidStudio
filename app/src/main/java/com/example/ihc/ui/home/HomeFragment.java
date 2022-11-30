@@ -98,6 +98,8 @@ public class HomeFragment extends Fragment {
                 if(userArrayList.get(value).getUuid()!=null)
                     i.putExtra("uuid", userArrayList.get(value).getUuid());
                 if(userArrayList.get(value).getBio()!=null)
+                    i.putExtra("age",  userArrayList.get(value).getAge());
+                if(userArrayList.get(value).getBio()!=null)
                     i.putExtra("bio",  userArrayList.get(value).getBio());
                 if(userArrayList.get(value).getCountry()!=null)
                     i.putExtra("country", userArrayList.get(value).getCountry());
@@ -185,6 +187,9 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+
+
+
     void updateMatches(@NonNull User user){
         Intent i = new Intent(getActivity(), Splash.class);
         startActivity(i);
@@ -195,78 +200,12 @@ public class HomeFragment extends Fragment {
         Random random = new Random();
         Integer map=random.nextInt(3);
         washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(locationsMatches.size()+1)));
+        washingtonRef.update("nMatches", FieldValue.increment(1));
+
+        DocumentReference a = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
+        a.update("matches", FieldValue.arrayUnion(currentUser.getUid()+"@"+(map+1)+"@"+user.getnMatches()));
+        a.update("nMatches", FieldValue.increment(1));
     }
-    boolean getUser(String uuid,String local,String pos){
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser!=null) {
-            DocumentReference docRef =FirebaseFirestore.getInstance().collection("/users").document(uuid);
-            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                  @Override
-                                                  public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                      User user  = documentSnapshot.toObject(User.class);
-                                                      if(user.getUuid().compareTo(currentUser.getUid())!=0){
-                                                          user.setOrder(Integer.parseInt(pos));
-                                                          userMatches.add(user);
-                                                          Collections.sort(userMatches, new Comparator<User>() {
-                                                              @Override
-                                                              public int compare(User a1, User a2) {
-                                                                  return a1.getOrder() - a2.getOrder();
-                                                              }
-                                                          });
-                                                          getLoctions(local,pos);
-                                                          Log.e(":(",Integer.toString(user.getOrder()));
-
-                                                      }
-
-
-                                                  }
-                                              }
-            );
-        }
-        return false;
-
-    }
-    void getMatches() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser!=null) {
-            Log.e("DEBUG", "aaaaa");
-            FirebaseFirestore.getInstance().collection("/users")
-                    .document(currentUser.getUid()).get()
-                    .addOnCompleteListener(
-                            new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    DocumentSnapshot document = task.getResult();
-                                    List<String> group = (List<String>) document.get("matches");
-                                    for (String a : group) {
-                                        String array[]=a.split("@");
-                                        getUser(array[0],array[1],array[2]);
-                                    }
-
-
-                                }
-                            });
-        }
-    }
-    void getLoctions(String uuid,String pos){
-        DocumentReference docRef =FirebaseFirestore.getInstance().collection("/locations").document(uuid);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Route route  = documentSnapshot.toObject(Route.class);
-                route.setOrder(Integer.parseInt(pos));
-                locationsMatches.add(route);
-                Collections.sort(locationsMatches, new Comparator<Route>() {
-                    @Override
-                    public int compare(Route a1, Route a2) {
-                        return a1.getOrder() - a2.getOrder();
-                    }
-                });
-
-            }}
-        );
-    }
-
 
 }
 

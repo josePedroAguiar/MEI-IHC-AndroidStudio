@@ -40,7 +40,7 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mChatLayoutManager = new LinearLayoutManager(ChatActivity.this);
         mRecyclerView.setLayoutManager(mChatLayoutManager);
-        mChatAdapter = new ChatAdapter(getDataSetChat(), ChatActivity.this);
+        //mChatAdapter = new ChatAdapter(getDataSetChat(), ChatActivity.this);
         mRecyclerView.setAdapter(mChatAdapter);
 
     }

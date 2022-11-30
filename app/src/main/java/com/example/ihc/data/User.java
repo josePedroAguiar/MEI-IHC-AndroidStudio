@@ -7,6 +7,7 @@ public class User {
 
     private String uuid;
     private  int order;
+    private  int nMatches=0;
     //private  ArrayList<String> photosUri=new ArrayList<>();
     private String photoUri,bio,name,age, email, country;
 
@@ -97,5 +98,13 @@ public class User {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public int getnMatches() {
+        return nMatches;
+    }
+
+    public void setnMatches(int nMatches) {
+        this.nMatches = nMatches;
     }
 }

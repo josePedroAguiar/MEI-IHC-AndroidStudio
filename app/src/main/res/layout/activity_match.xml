@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/container_image"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="8dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -83,15 +83,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bio"
+                        android:text="Age"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/bio"
+                        android:id="@+id/age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sleeping 💤"
+                        android:text="25"
                         android:textColor="@color/white"
                         android:textSize="26sp" />
 
@@ -111,19 +111,18 @@
                     android:layout_marginStart="25dp"
                     android:orientation="vertical"
                     android:textColor="@color/white">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Age"
+                        android:text="City, Country"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/age"
+                        android:id="@+id/country_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="25"
+                        android:text="Alabama, USA"
                         android:textColor="@color/white"
                         android:textSize="26sp" />
 
@@ -168,27 +167,42 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="City, Country"
+                        android:text="Bio"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/country_profile"
+                        android:id="@+id/bio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Alabama, USA"
+                        android:text="Sleeping 💤"
                         android:textColor="@color/white"
                         android:textSize="26sp" />
-                    <ImageView
-                        android:id="@+id/map"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/_8_location_pin">
 
-                    </ImageView>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginTop="125dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="430dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="@color/card_color">
+                <ImageView
+                    android:id="@+id/map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/_8_location_pin">
+
+                </ImageView>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
             </RelativeLayout>
 
             <com.google.android.material.appbar.AppBarLayout
