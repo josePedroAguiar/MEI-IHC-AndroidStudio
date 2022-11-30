@@ -188,8 +188,8 @@ public class HomeFragment extends Fragment {
         DocumentReference washingtonRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
         //washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
         Random random = new Random();
-        Integer map=random.nextInt(4);
-        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+map+"@"+(locationsMatches.size()+1)));
+        Integer map=random.nextInt(3);
+        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(locationsMatches.size()+1)));
     }
     boolean getUser(String uuid,String local,String pos){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
