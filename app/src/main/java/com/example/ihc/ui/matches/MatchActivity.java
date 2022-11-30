@@ -37,6 +37,7 @@ public class MatchActivity extends AppCompatActivity {
             String phone = intent.getStringExtra("phone");
             String bio = intent.getStringExtra("bio");
             String link = intent.getStringExtra("link");
+            String link_map = intent.getStringExtra("link_map");
             String country = intent.getStringExtra("country");
             int imageid = intent.getIntExtra("imageid", R.drawable.ic_baseline_person_24);
 
@@ -62,8 +63,10 @@ public class MatchActivity extends AppCompatActivity {
             });
 
             imageSwitcher.setImageResource(imageid); // set the image in ImageSwitcher
-            ImageView i= binding.image;
-            Picasso.get().load(link).into(i);
+            ImageView user= binding.image;
+            Picasso.get().load(link).into(user);
+            ImageView map= binding.map;
+            Picasso.get().load(link_map).into(map);
             // Declare in and out animations and load them using AnimationUtils class
             Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
             Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);

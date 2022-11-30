@@ -70,6 +70,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Logged in with success.",
                             Toast.LENGTH_SHORT).show();
                     updateUI(user);
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCustomToken:failure", task.getException());
@@ -105,7 +106,7 @@ public class Login extends AppCompatActivity {
     // [END on_start_check_user]
 
     private void updateUI(FirebaseUser user) {
-        Intent intent = new Intent(Login.this, MainActivity.class);
+        Intent intent = new Intent(Login.this, Splash.class);
         startActivity(intent);
         finish();
     }

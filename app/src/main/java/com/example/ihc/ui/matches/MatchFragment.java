@@ -1,5 +1,7 @@
 package com.example.ihc.ui.matches;
 
+import static com.example.ihc.MainActivity.locationsMatches;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,15 +60,17 @@ public class MatchFragment extends Fragment {
 
 
         Log.e("wewe",Integer.toString(userMatches.size()));
+        Log.e("wewe",Integer.toString(locationsMatches.size()));
+        int pos=0;
         for (User user:userMatches) {
             //
 
             //
 
             //
-
-            Match match = new Match(user.getName(), user.getCountry(), user.getUuid(), user.getPhotoUri(), user.getCountry(), user.getPhotoUri());
+            Match match = new Match(user.getName(), locationsMatches.get(pos).getImage(), user.getUuid(), user.getPhotoUri(), user.getCountry(), user.getPhotoUri());
             userArrayList.add(match);
+            pos++;
 
         }
         ///
@@ -85,6 +89,7 @@ public class MatchFragment extends Fragment {
             i.putExtra("phone", userMatches.get(position).getPhotoUri());
             i.putExtra("country", userMatches.get(position).getCountry());
             i.putExtra("link",userMatches.get(position).getPhotoUri());
+            i.putExtra("link_map",locationsMatches.get(position).getImage());
             startActivity(i);
 
         });

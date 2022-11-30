@@ -47,16 +47,17 @@ public class ListAdapterMatch extends ArrayAdapter<Match> {
 
         }
         ImageView imageView = convertView.findViewById(R.id.image);
+        ImageView imageView2 = convertView.findViewById(R.id.map);
         TextView userName = convertView.findViewById(R.id.personName);
 
         TextView bio = convertView.findViewById(R.id.bio);
-        TextView lastMsg = convertView.findViewById(R.id.lastMessage);
         TextView time = convertView.findViewById(R.id.msgtime);
 
         if(match.imageId!=null)
             Picasso.get().load(match.imageId).into(imageView);
+        if(match.mapId!=null)
+            Picasso.get().load(match.mapId).into(imageView2);
         userName.setText(match.name);
-        lastMsg.setText(match.lastMessage);
         time.setText(match.lastMsgTime);
 
 

@@ -6,17 +6,18 @@ public class User {
 
 
     private String uuid;
-    private  ArrayList<String> photosUri=new ArrayList<>();
+    private  int order;
+    //private  ArrayList<String> photosUri=new ArrayList<>();
     private String photoUri,bio,name, email, country;
-    private ArrayList<String> matches=new ArrayList<>();
+    private ArrayList<String> matchesUiid=new ArrayList<>();
 
     public User() {
-        matches=new ArrayList<>();
+        matchesUiid=new ArrayList<>();
     }
 
-    public ArrayList<String> getPhotosUri() {
+    /*public ArrayList<String> getPhotosUri() {
         return photosUri;
-    }
+    }*/
 
     public String getBio() {
         return bio;
@@ -31,7 +32,7 @@ public class User {
     }
 
     public ArrayList<String> getMatchesUUIDs() {
-        return matches;
+        return matchesUiid;
     }
 
     public User(String name, String email) {
@@ -79,5 +80,13 @@ public class User {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

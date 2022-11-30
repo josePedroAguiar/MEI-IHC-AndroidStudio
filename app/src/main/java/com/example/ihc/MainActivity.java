@@ -1,5 +1,7 @@
 package com.example.ihc;
 
+import static java.util.Collections.*;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ihc.data.Route;
 import com.example.ihc.data.User;
 import com.example.ihc.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +29,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     public    static ArrayList<User> userArrayList;
+    public    static ArrayList<Route> locationsMatches;
     // Array list for recycler view data source
     ArrayList<String> source;
 
