@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        wheel = binding.luckywheel;
 
         if(userArrayList!=null) {
             if(userArrayList.size()==0){
@@ -76,8 +76,10 @@ public class HomeFragment extends Fragment {
                 wheelItemList=new ArrayList<>();
                 generateWheelItems();
             }
-            wheel = binding.luckywheel;
-            wheel.addWheelItems(wheelItemList);
+                wheel.addWheelItems(wheelItemList);
+
+
+
 
             wheel.setRotation(-90);
             ObjectAnimator animation = ObjectAnimator.ofFloat(wheel, "translationX", 550);
@@ -130,6 +132,7 @@ public class HomeFragment extends Fragment {
 
     private void generateWheelItems() {
         int i=0;
+        wheelItemList=new ArrayList<>();
         for (User u: userArrayList){
             if(i%2==0){
                 WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(getResources(), R.color.purple_500, null),
