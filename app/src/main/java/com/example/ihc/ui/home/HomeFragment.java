@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
     private LuckyWheel wheel;
 
-    private final List<WheelItem> wheelItemList = new ArrayList<>();
+    private List<WheelItem> wheelItemList = new ArrayList<>();
     private String points;
     private  int value;
 
@@ -70,8 +70,11 @@ public class HomeFragment extends Fragment {
             if(userArrayList.size()==0){
                 userArrayList.add(new User());
             }
-            if(wheelItemList.size()<userArrayList.size())
+            int in=wheelItemList.size();
+            if(in<userArrayList.size()){
+                wheelItemList=new ArrayList<>();
                 generateWheelItems();
+            }
             wheel = binding.luckywheel;
             wheel.addWheelItems(wheelItemList);
 
@@ -162,6 +165,8 @@ public class HomeFragment extends Fragment {
     public void signOut() {
         // [START auth_sign_out]
         FirebaseAuth.getInstance().signOut();
+
+        getActivity().finish();
         // [END auth_sign_out]
     }
     private void addDataToFirestore(@NonNull User user) {
@@ -199,14 +204,13 @@ public class HomeFragment extends Fragment {
         //washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
         Random random = new Random();
         Integer map=random.nextInt(3);
-        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(locationsMatches.size()+1)));
+        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(userMatches.size())));
         washingtonRef.update("nMatches", FieldValue.increment(1));
 
-        DocumentReference a = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
+        DocumentReference a = FirebaseFirestore.getInstance().collection("/users").document(user.getUuid());
         a.update("matches", FieldValue.arrayUnion(currentUser.getUid()+"@"+(map+1)+"@"+user.getnMatches()));
         a.update("nMatches", FieldValue.increment(1));
     }
-
 }
 
 

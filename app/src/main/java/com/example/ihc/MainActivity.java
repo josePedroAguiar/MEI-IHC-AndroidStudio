@@ -215,4 +215,11 @@ public class MainActivity extends AppCompatActivity {
         // [END auth_email_cred]
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent view = new Intent(MainActivity.this, Splash.class);
+        startActivity(view);
+    }
+
 }

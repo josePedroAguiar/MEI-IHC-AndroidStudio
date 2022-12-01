@@ -128,7 +128,7 @@ public class Register extends AppCompatActivity {
                         Log.d(TAG, "User added with ID: " + currentUser.getUid()))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
 
-        Intent intent = new Intent(Register.this, MainActivity.class);
+        Intent intent = new Intent(Register.this, Splash.class);
         startActivity(intent);
         finish();
     }

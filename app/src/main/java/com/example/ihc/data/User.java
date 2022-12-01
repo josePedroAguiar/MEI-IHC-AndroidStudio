@@ -9,7 +9,7 @@ public class User {
     private  int order;
     private  int nMatches=0;
     //private  ArrayList<String> photosUri=new ArrayList<>();
-    private String photoUri,bio,name,age, email, country;
+    private String photoUri,bio,name,age, email, country="";
 
     private ArrayList<String> matchesUiid=new ArrayList<>();
 
