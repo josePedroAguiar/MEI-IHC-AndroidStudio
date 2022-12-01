@@ -218,8 +218,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Intent view = new Intent(MainActivity.this, Splash.class);
-        startActivity(view);
     }
 
 }
