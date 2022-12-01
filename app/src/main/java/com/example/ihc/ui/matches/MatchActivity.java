@@ -3,6 +3,7 @@ package com.example.ihc.ui.matches;
 import static com.example.ihc.MainActivity.locationsMatches;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -45,6 +46,7 @@ public class MatchActivity extends AppCompatActivity {
             String bio = intent.getStringExtra("bio");
             String link = intent.getStringExtra("link");
             String link_map = intent.getStringExtra("link_map");
+            String link_to_map = intent.getStringExtra("link_to_map");
             String country = intent.getStringExtra("country");
             String id = intent.getStringExtra("id");
             int imageid = intent.getIntExtra("imageid", R.drawable.ic_baseline_person_24);
@@ -110,7 +112,12 @@ public class MatchActivity extends AppCompatActivity {
                 i.putExtra("id", id);
                 startActivity(i);
             });
-
+            ImageView map_card = findViewById(R.id.map);
+            map_card.setOnClickListener(v -> {
+                Uri uri = Uri.parse(link_to_map);
+                Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(i);
+            });
         }
 
 

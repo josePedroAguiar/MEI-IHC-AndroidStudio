@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
     private List<WheelItem> wheelItemList = new ArrayList<>();
     private String points;
     private  int value;
-
+    static Route route;
     private ImageButton logoutBtn;
     //public static int time = 0;
     Integer map;
@@ -92,13 +92,15 @@ public class HomeFragment extends Fragment {
             LuckyWheel a = binding.luckywheel;
 
             a.setOnClickListener(view -> {
+                map=random.nextInt(3);
+                getLoctions(Integer.toString(map+1));
                 value=random.nextInt(userArrayList.size());
                 points = String.valueOf(value);
                 Toast.makeText(getActivity(),points,Toast.LENGTH_SHORT).show();
                 wheel.rotateWheelTo(value+1);
             });
             wheel.setLuckyWheelReachTheTarget(() -> {
-                map=random.nextInt(3);
+
                 updateMatches(userArrayList.get(value));
                 Intent i = new Intent(getActivity(), MatchActivity.class);
                 points = String.valueOf(value);
@@ -116,8 +118,9 @@ public class HomeFragment extends Fragment {
                     i.putExtra("link",userArrayList.get(value).getPhotoUri());
                 if(userArrayList.get(value).getUuid()!=null)
                     i.putExtra("id", userArrayList.get(value).getUuid());;
-                i.putExtra("link",userArrayList.get(value).getPhotoUri());
-                i.putExtra("link_map",locationsMatches.get(map).getImage());
+
+                i.putExtra("link_to_map",route.getLink());
+                i.putExtra("link_map",route.getImage());
                 startActivity(i);
 
             });
@@ -218,6 +221,19 @@ public class HomeFragment extends Fragment {
         DocumentReference a = FirebaseFirestore.getInstance().collection("/users").document(user.getUuid());
         a.update("matches", FieldValue.arrayUnion(currentUser.getUid()+"@"+(map+1)+"@"+user.getnMatches()));
         a.update("nMatches", FieldValue.increment(1));
+    }
+
+    void getLoctions(String uuid){
+
+        DocumentReference docRef =FirebaseFirestore.getInstance().collection("/locations").document(uuid);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                 route = documentSnapshot.toObject(Route.class);
+                 Log.e("OLLLLA",route.getLink());
+
+            }}
+        );
     }
 }
 
