@@ -59,13 +59,16 @@ public class HomeFragment extends Fragment {
 
     private ImageButton logoutBtn;
     //public static int time = 0;
-
+    Integer map;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         wheel = binding.luckywheel;
+
+        Random random = new Random();
+
 
         if(userArrayList!=null) {
             if(userArrayList.size()==0){
@@ -89,13 +92,13 @@ public class HomeFragment extends Fragment {
             LuckyWheel a = binding.luckywheel;
 
             a.setOnClickListener(view -> {
-                Random random = new Random();
                 value=random.nextInt(userArrayList.size());
                 points = String.valueOf(value);
                 Toast.makeText(getActivity(),points,Toast.LENGTH_SHORT).show();
                 wheel.rotateWheelTo(value+1);
             });
             wheel.setLuckyWheelReachTheTarget(() -> {
+                map=random.nextInt(3);
                 updateMatches(userArrayList.get(value));
                 Intent i = new Intent(getActivity(), MatchActivity.class);
                 points = String.valueOf(value);
@@ -112,7 +115,9 @@ public class HomeFragment extends Fragment {
                 if(userArrayList.get(value).getPhotoUri()!=null)
                     i.putExtra("link",userArrayList.get(value).getPhotoUri());
                 if(userArrayList.get(value).getUuid()!=null)
-                    i.putExtra("id", userArrayList.get(value).getUuid());
+                    i.putExtra("id", userArrayList.get(value).getUuid());;
+                i.putExtra("link",userArrayList.get(value).getPhotoUri());
+                i.putExtra("link_map",locationsMatches.get(map).getImage());
                 startActivity(i);
 
             });
@@ -206,8 +211,7 @@ public class HomeFragment extends Fragment {
         Log.e("DEBUG","aaaaa");
         DocumentReference washingtonRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
         //washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
-        Random random = new Random();
-        Integer map=random.nextInt(3);
+
         washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(userMatches.size())));
         washingtonRef.update("nMatches", FieldValue.increment(1));
 
