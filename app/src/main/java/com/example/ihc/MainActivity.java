@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     public    static ArrayList<User> userArrayList;
     public    static ArrayList<Route> locationsMatches;
     // Array list for recycler view data source
-    ArrayList<String> source;
 
     // Layout Manager
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
@@ -214,6 +213,11 @@ public class MainActivity extends AppCompatActivity {
         // [START auth_email_cred]
         AuthCredential credential = EmailAuthProvider.getCredential(email, password);
         // [END auth_email_cred]
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 
 }

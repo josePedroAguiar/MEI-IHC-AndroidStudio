@@ -41,7 +41,7 @@ public class MatchActivity extends AppCompatActivity {
 
         if (intent != null) {
             String name = intent.getStringExtra("name");
-            String phone = intent.getStringExtra("phone");
+            String age = intent.getStringExtra("age");
             String bio = intent.getStringExtra("bio");
             String link = intent.getStringExtra("link");
             String link_map = intent.getStringExtra("link_map");
@@ -51,7 +51,7 @@ public class MatchActivity extends AppCompatActivity {
 
             binding.nameProfile.setText(name);
             binding.bio.setText(bio);
-            binding.phoneProfile.setText(phone);
+            binding.age.setText(age);
             binding.countryProfile.setText(country);
 
             Button btnNext = findViewById(R.id.btnNext);
@@ -103,7 +103,7 @@ public class MatchActivity extends AppCompatActivity {
                     currentIndex = count - 1;
                 imageSwitcher.setImageResource(imageIds[currentIndex]); // set the image in ImageSwitcher
             });
-            
+
             Button b = findViewById(R.id.button_message);
             b.setOnClickListener(v -> {
                 Intent i = new Intent(this, ChatActivity.class);

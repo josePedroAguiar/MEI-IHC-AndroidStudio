@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -52,28 +53,36 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
     private LuckyWheel wheel;
 
-    private final List<WheelItem> wheelItemList = new ArrayList<>();
+    private List<WheelItem> wheelItemList = new ArrayList<>();
     private String points;
     private  int value;
 
     private ImageButton logoutBtn;
     //public static int time = 0;
-
+    Integer map;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        wheel = binding.luckywheel;
+
+        Random random = new Random();
 
 
         if(userArrayList!=null) {
             if(userArrayList.size()==0){
                 userArrayList.add(new User());
             }
-            if(wheelItemList.size()<userArrayList.size())
-            generateWheelItems();
-            wheel = binding.luckywheel;
-            wheel.addWheelItems(wheelItemList);
+            int in=wheelItemList.size();
+            if(in<userArrayList.size()){
+                wheelItemList=new ArrayList<>();
+                generateWheelItems();
+            }
+                wheel.addWheelItems(wheelItemList);
+
+
+
 
             wheel.setRotation(-90);
             ObjectAnimator animation = ObjectAnimator.ofFloat(wheel, "translationX", 550);
@@ -83,23 +92,32 @@ public class HomeFragment extends Fragment {
             LuckyWheel a = binding.luckywheel;
 
             a.setOnClickListener(view -> {
-                Random random = new Random();
                 value=random.nextInt(userArrayList.size());
                 points = String.valueOf(value);
                 Toast.makeText(getActivity(),points,Toast.LENGTH_SHORT).show();
                 wheel.rotateWheelTo(value+1);
             });
             wheel.setLuckyWheelReachTheTarget(() -> {
+                map=random.nextInt(3);
                 updateMatches(userArrayList.get(value));
                 Intent i = new Intent(getActivity(), MatchActivity.class);
                 points = String.valueOf(value);
                 Log.e("ERR0 ",points);
                 i.putExtra("name", userArrayList.get(value).getName());
-                i.putExtra("uuid", userArrayList.get(value).getUuid());
-                i.putExtra("bio", "ola");
-                i.putExtra("country", userArrayList.get(value).getCountry());
+                if(userArrayList.get(value).getUuid()!=null)
+                    i.putExtra("uuid", userArrayList.get(value).getUuid());
+                if(userArrayList.get(value).getBio()!=null)
+                    i.putExtra("age",  userArrayList.get(value).getAge());
+                if(userArrayList.get(value).getBio()!=null)
+                    i.putExtra("bio",  userArrayList.get(value).getBio());
+                if(userArrayList.get(value).getCountry()!=null)
+                    i.putExtra("country", userArrayList.get(value).getCountry());
+                if(userArrayList.get(value).getPhotoUri()!=null)
+                    i.putExtra("link",userArrayList.get(value).getPhotoUri());
+                if(userArrayList.get(value).getUuid()!=null)
+                    i.putExtra("id", userArrayList.get(value).getUuid());;
                 i.putExtra("link",userArrayList.get(value).getPhotoUri());
-                i.putExtra("id", userArrayList.get(value).getUuid());
+                i.putExtra("link_map",locationsMatches.get(map).getImage());
                 startActivity(i);
 
             });
@@ -119,6 +137,7 @@ public class HomeFragment extends Fragment {
 
     private void generateWheelItems() {
         int i=0;
+        wheelItemList=new ArrayList<>();
         for (User u: userArrayList){
             if(i%2==0){
                 WheelItem whellItem = new WheelItem(ResourcesCompat.getColor(getResources(), R.color.purple_500, null),
@@ -155,6 +174,8 @@ public class HomeFragment extends Fragment {
     public void signOut() {
         // [START auth_sign_out]
         FirebaseAuth.getInstance().signOut();
+
+        getActivity().finish();
         // [END auth_sign_out]
     }
     private void addDataToFirestore(@NonNull User user) {
@@ -180,6 +201,9 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+
+
+
     void updateMatches(@NonNull User user){
         Intent i = new Intent(getActivity(), Splash.class);
         startActivity(i);
@@ -187,82 +211,14 @@ public class HomeFragment extends Fragment {
         Log.e("DEBUG","aaaaa");
         DocumentReference washingtonRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
         //washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()));
-        Random random = new Random();
-        Integer map=random.nextInt(3);
-        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(locationsMatches.size()+1)));
+
+        washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(userMatches.size())));
+        washingtonRef.update("nMatches", FieldValue.increment(1));
+
+        DocumentReference a = FirebaseFirestore.getInstance().collection("/users").document(user.getUuid());
+        a.update("matches", FieldValue.arrayUnion(currentUser.getUid()+"@"+(map+1)+"@"+user.getnMatches()));
+        a.update("nMatches", FieldValue.increment(1));
     }
-    boolean getUser(String uuid,String local,String pos){
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser!=null) {
-            DocumentReference docRef =FirebaseFirestore.getInstance().collection("/users").document(uuid);
-            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                  @Override
-                                                  public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                      User user  = documentSnapshot.toObject(User.class);
-                                                      if(user.getUuid().compareTo(currentUser.getUid())!=0){
-                                                          user.setOrder(Integer.parseInt(pos));
-                                                          userMatches.add(user);
-                                                          Collections.sort(userMatches, new Comparator<User>() {
-                                                              @Override
-                                                              public int compare(User a1, User a2) {
-                                                                  return a1.getOrder() - a2.getOrder();
-                                                              }
-                                                          });
-                                                          getLoctions(local,pos);
-                                                          Log.e(":(",Integer.toString(user.getOrder()));
-
-                                                      }
-
-
-                                                  }
-                                              }
-            );
-        }
-        return false;
-
-    }
-    void getMatches() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser!=null) {
-            Log.e("DEBUG", "aaaaa");
-            FirebaseFirestore.getInstance().collection("/users")
-                    .document(currentUser.getUid()).get()
-                    .addOnCompleteListener(
-                            new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    DocumentSnapshot document = task.getResult();
-                                    List<String> group = (List<String>) document.get("matches");
-                                    for (String a : group) {
-                                        String array[]=a.split("@");
-                                        getUser(array[0],array[1],array[2]);
-                                    }
-
-
-                                }
-                            });
-        }
-    }
-    void getLoctions(String uuid,String pos){
-        DocumentReference docRef =FirebaseFirestore.getInstance().collection("/locations").document(uuid);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Route route  = documentSnapshot.toObject(Route.class);
-                route.setOrder(Integer.parseInt(pos));
-                locationsMatches.add(route);
-                Collections.sort(locationsMatches, new Comparator<Route>() {
-                    @Override
-                    public int compare(Route a1, Route a2) {
-                        return a1.getOrder() - a2.getOrder();
-                    }
-                });
-
-            }}
-        );
-    }
-
-
 }
 
 

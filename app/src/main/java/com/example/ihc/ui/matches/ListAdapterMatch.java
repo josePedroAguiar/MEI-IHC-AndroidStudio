@@ -50,7 +50,7 @@ public class ListAdapterMatch extends ArrayAdapter<Match> {
         ImageView imageView2 = convertView.findViewById(R.id.map);
         TextView userName = convertView.findViewById(R.id.personName);
 
-        TextView bio = convertView.findViewById(R.id.bio);
+        TextView bio = convertView.findViewById(R.id.lastMessage);
         TextView time = convertView.findViewById(R.id.msgtime);
 
         if(match.imageId!=null)
@@ -58,7 +58,8 @@ public class ListAdapterMatch extends ArrayAdapter<Match> {
         if(match.mapId!=null)
             Picasso.get().load(match.mapId).into(imageView2);
         userName.setText(match.name);
-        time.setText(match.lastMsgTime);
+        time.setText(match.age);
+        bio.setText(match.country);
 
 
 
