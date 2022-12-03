@@ -115,6 +115,7 @@ public class HomeFragment extends Fragment {
             });
             }
             else  {
+                    userArrayList=new ArrayList<>();
                     text1.setVisibility(View.VISIBLE);
                     text.setVisibility(View.INVISIBLE);
                     wheel.setVisibility(View.INVISIBLE);

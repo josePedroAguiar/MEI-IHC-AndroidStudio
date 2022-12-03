@@ -41,6 +41,7 @@ public class Splash extends AppCompatActivity {
             actionBar.hide();
             setContentView(R.layout.activity_slash);
             userArrayList=new ArrayList<>();
+
             locationsMatches=new ArrayList<>();
             userMatches=new ArrayList<>();
 
