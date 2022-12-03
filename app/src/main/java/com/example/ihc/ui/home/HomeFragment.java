@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -91,9 +92,13 @@ public class HomeFragment extends Fragment {
             animation.start();
 
 
-            LuckyWheel a = binding.luckywheel;
-
-            a.setOnClickListener(view -> {
+            TextView text = binding.spinText;
+            TextView text1 = binding.text;
+            if(userArrayList.size()==0){
+                text1.setVisibility(View.INVISIBLE);
+                text.setVisibility(View.VISIBLE);
+                wheel.setVisibility(View.VISIBLE);
+            wheel.setOnClickListener(view -> {
                 map=random.nextInt(3);
                 getLoctions(Integer.toString(map+1));
                 value=random.nextInt(userArrayList.size());
@@ -108,6 +113,12 @@ public class HomeFragment extends Fragment {
                 else
                     Toast.makeText(getActivity(),"⚠︎ Your daily spin has already been used!", Toast.LENGTH_SHORT).show();
             });
+            }
+            else  {
+                    text1.setVisibility(View.VISIBLE);
+                    text.setVisibility(View.INVISIBLE);
+                    wheel.setVisibility(View.INVISIBLE);
+                  Toast.makeText(getActivity(),"⚠ ︎Come back later! We don't have a match for you yet", Toast.LENGTH_SHORT).show();}
             wheel.setLuckyWheelReachTheTarget(() -> {
 
                 updateMatches(userArrayList.get(value));
