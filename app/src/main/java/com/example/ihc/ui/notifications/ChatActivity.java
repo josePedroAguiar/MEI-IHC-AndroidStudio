@@ -1,31 +1,26 @@
 package com.example.ihc.ui.notifications;
 
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import com.example.ihc.R;
 import com.example.ihc.databinding.ActivityChatBinding;
-import com.example.ihc.databinding.ActivityMatchBinding;
-import com.google.firebase.auth.FirebaseAuth;
+import com.xwray.groupie.GroupAdapter;
+import com.xwray.groupie.Item;
+import com.xwray.groupie.GroupieViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mChatAdapter;
-    private RecyclerView.LayoutManager mChatLayoutManager;
-
-    private String userId;
-
     private ActivityChatBinding binding;
 
-    private ArrayList<Chat> resultsChat = new ArrayList<>();
-    private List<Chat> getDataSetChat() { return resultsChat; }
+    private GroupAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +28,44 @@ public class ChatActivity extends AppCompatActivity {
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //String name = (String) savedInstanceState.getSerializable("name");
+        //String name = getIntent().getExtras().getParcelable("name");
+        String name = getIntent().getStringExtra("name");
+        getSupportActionBar().setTitle(name);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setHasFixedSize(true);
-        mChatLayoutManager = new LinearLayoutManager(ChatActivity.this);
-        mRecyclerView.setLayoutManager(mChatLayoutManager);
-        //mChatAdapter = new ChatAdapter(getDataSetChat(), ChatActivity.this);
-        mRecyclerView.setAdapter(mChatAdapter);
+        RecyclerView rv = findViewById(R.id.recycler_chat);
+
+        adapter = new GroupAdapter();
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(adapter);
+
+        adapter.add(new MessageItem(true));
+        adapter.add(new MessageItem(true));
+        adapter.add(new MessageItem(false));
+        adapter.add(new MessageItem(false));
+        adapter.add(new MessageItem(true));
+        adapter.add(new MessageItem(false));
 
     }
+
+    private class MessageItem extends Item<GroupieViewHolder> {
+
+        private final boolean isLeft;
+
+        public MessageItem(boolean isLeft) {
+            this.isLeft = isLeft;
+        }
+
+
+        @Override
+        public void bind(@NonNull GroupieViewHolder viewHolder, int position) {
+
+        }
+
+        public int getLayout() {
+            return isLeft ? R.layout.item_to_message : R.layout.item_from_message;
+        }
+
+    }
+
 }

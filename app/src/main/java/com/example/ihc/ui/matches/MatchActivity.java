@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ihc.R;
+import com.example.ihc.data.User;
 import com.example.ihc.databinding.ActivityMatchBinding;
 import com.example.ihc.ui.notifications.ChatActivity;
 import com.squareup.picasso.Picasso;
@@ -109,7 +110,8 @@ public class MatchActivity extends AppCompatActivity {
             Button b = findViewById(R.id.button_message);
             b.setOnClickListener(v -> {
                 Intent i = new Intent(this, ChatActivity.class);
-                i.putExtra("id", id);
+                i.putExtra("name", name);
+
                 startActivity(i);
             });
             ImageView map_card = findViewById(R.id.map);
