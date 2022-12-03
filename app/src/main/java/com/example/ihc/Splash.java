@@ -33,6 +33,7 @@ import java.util.List;
 
 
 public class Splash extends AppCompatActivity {
+        public static  User me= new User();
         @Override
         protected void onCreate (Bundle savedInstanceState) {
             super.onCreate (savedInstanceState);
@@ -40,13 +41,16 @@ public class Splash extends AppCompatActivity {
             actionBar.hide();
             setContentView(R.layout.activity_slash);
             userArrayList=new ArrayList<>();
+
             locationsMatches=new ArrayList<>();
             userMatches=new ArrayList<>();
-            getMatches();
 
+            getMatches();
+            fetchUsers();
+            getUser();
 
             Handler handler =new Handler();
-            fetchUsers();
+
 
             handler.postDelayed (new Runnable () {
                 @Override
@@ -78,6 +82,19 @@ public class Splash extends AppCompatActivity {
                     }
                 });}
     }
+    void getUser(){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser!=null) {
+            DocumentReference docRef =FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                      @Override
+                      public void onSuccess(DocumentSnapshot documentSnapshot) {
+                           me  = documentSnapshot.toObject(User.class);
+                          }
+
+            });
+        }
+        }
     boolean getUser(String uuid,String local,String pos){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser!=null) {

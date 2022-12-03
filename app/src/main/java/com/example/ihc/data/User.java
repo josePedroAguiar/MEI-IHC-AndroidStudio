@@ -1,12 +1,23 @@
 package com.example.ihc.data;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class User {
 
 
     private String uuid;
     private  int order;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    private String date;
     private  int nMatches=0;
     //private  ArrayList<String> photosUri=new ArrayList<>();
     private String photoUri,bio,name,age, email, country="";

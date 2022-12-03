@@ -2,6 +2,7 @@ package com.example.ihc.ui.home;
 
 import static com.example.ihc.MainActivity.locationsMatches;
 import static com.example.ihc.MainActivity.userArrayList;
+import static com.example.ihc.Splash.me;
 import static com.example.ihc.ui.matches.MatchFragment.userMatches;
 
 import android.animation.ObjectAnimator;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,6 +47,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -69,7 +72,7 @@ public class HomeFragment extends Fragment {
 
         Random random = new Random();
 
-
+        long len=userArrayList.size();
         if(userArrayList!=null) {
             if(userArrayList.size()==0){
                 userArrayList.add(new User());
@@ -89,16 +92,34 @@ public class HomeFragment extends Fragment {
             animation.start();
 
 
-            LuckyWheel a = binding.luckywheel;
-
-            a.setOnClickListener(view -> {
+            TextView text = binding.spinText;
+            TextView text1 = binding.text;
+            if(len>0){
+                text1.setVisibility(View.INVISIBLE);
+                text.setVisibility(View.VISIBLE);
+                wheel.setVisibility(View.VISIBLE);
+            wheel.setOnClickListener(view -> {
                 map=random.nextInt(3);
                 getLoctions(Integer.toString(map+1));
                 value=random.nextInt(userArrayList.size());
                 points = String.valueOf(value);
-                Toast.makeText(getActivity(),points,Toast.LENGTH_SHORT).show();
-                wheel.rotateWheelTo(value+1);
+                Date date= new Date();
+                Long time=date.getTime();
+                if(me.getDate()==null ||
+                        time>=Long.parseLong(me.getDate())+60000/* swap to 86400000 */)
+                {
+                    me.setDate(time.toString());
+                    wheel.rotateWheelTo(value+1);         }
+                else
+                    Toast.makeText(getActivity(),"⚠︎ Your daily spin has already been used!", Toast.LENGTH_SHORT).show();
             });
+            }
+            else  {
+                    userArrayList=new ArrayList<>();
+                    text1.setVisibility(View.VISIBLE);
+                    text.setVisibility(View.INVISIBLE);
+                    wheel.setVisibility(View.INVISIBLE);
+                  Toast.makeText(getActivity(),"⚠ ︎Come back later! We don't have a match for you yet", Toast.LENGTH_SHORT).show();}
             wheel.setLuckyWheelReachTheTarget(() -> {
 
                 updateMatches(userArrayList.get(value));
@@ -217,6 +238,9 @@ public class HomeFragment extends Fragment {
 
         washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(userMatches.size())));
         washingtonRef.update("nMatches", FieldValue.increment(1));
+        Long time =new Date().getTime();
+
+        washingtonRef.update("date", time.toString());
 
         DocumentReference a = FirebaseFirestore.getInstance().collection("/users").document(user.getUuid());
         a.update("matches", FieldValue.arrayUnion(currentUser.getUid()+"@"+(map+1)+"@"+user.getnMatches()));

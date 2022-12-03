@@ -16,7 +16,18 @@
         android:text="@string/spin_the_wheel"
         android:textColor="@color/white"
         android:textSize="36sp" />
-
+    <TextView
+        android:id="@+id/text"
+        android:visibility="invisible"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="225dp"
+        android:layout_marginLeft="35dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text=" ︎Come back later! We don't have a match for you yet😔"
+        android:textColor="@color/white"
+        android:textSize="36sp" />
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/ripple"
         android:layout_width="wrap_content"
