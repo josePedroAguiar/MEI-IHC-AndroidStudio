@@ -100,11 +100,13 @@ public class HomeFragment extends Fragment {
                 points = String.valueOf(value);
                 Date date= new Date();
                 Long time=date.getTime();
-                if(me.getDate()==null || time>=Long.parseLong(me.getDate())+60000){
+                if(me.getDate()==null ||
+                        time>=Long.parseLong(me.getDate())+60000/* swap to 86400000 */)
+                {
                     me.setDate(time.toString());
                     wheel.rotateWheelTo(value+1);         }
                 else
-                    Toast.makeText(getActivity(),"Your daily spin has already been used!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"⚠︎ Your daily spin has already been used!", Toast.LENGTH_SHORT).show();
             });
             wheel.setLuckyWheelReachTheTarget(() -> {
 
