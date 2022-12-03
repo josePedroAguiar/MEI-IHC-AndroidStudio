@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
 
         Random random = new Random();
 
-
+        long len=userArrayList.size();
         if(userArrayList!=null) {
             if(userArrayList.size()==0){
                 userArrayList.add(new User());
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
 
             TextView text = binding.spinText;
             TextView text1 = binding.text;
-            if(userArrayList.size()==0){
+            if(len>0){
                 text1.setVisibility(View.INVISIBLE);
                 text.setVisibility(View.VISIBLE);
                 wheel.setVisibility(View.VISIBLE);
