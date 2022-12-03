@@ -2,6 +2,7 @@ package com.example.ihc.ui.home;
 
 import static com.example.ihc.MainActivity.locationsMatches;
 import static com.example.ihc.MainActivity.userArrayList;
+import static com.example.ihc.Splash.me;
 import static com.example.ihc.ui.matches.MatchFragment.userMatches;
 
 import android.animation.ObjectAnimator;
@@ -45,6 +46,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -96,8 +98,13 @@ public class HomeFragment extends Fragment {
                 getLoctions(Integer.toString(map+1));
                 value=random.nextInt(userArrayList.size());
                 points = String.valueOf(value);
-                Toast.makeText(getActivity(),points,Toast.LENGTH_SHORT).show();
-                wheel.rotateWheelTo(value+1);
+                Date date= new Date();
+                Long time=date.getTime();
+                if(me.getDate()==null || time>=Long.parseLong(me.getDate())+60000){
+                    me.setDate(time.toString());
+                    wheel.rotateWheelTo(value+1);         }
+                else
+                    Toast.makeText(getActivity(),"Your daily spin has already been used!", Toast.LENGTH_SHORT).show();
             });
             wheel.setLuckyWheelReachTheTarget(() -> {
 
@@ -217,6 +224,9 @@ public class HomeFragment extends Fragment {
 
         washingtonRef.update("matches", FieldValue.arrayUnion(user.getUuid()+"@"+(map+1)+"@"+(userMatches.size())));
         washingtonRef.update("nMatches", FieldValue.increment(1));
+        Long time =new Date().getTime();
+
+        washingtonRef.update("date", time.toString());
 
         DocumentReference a = FirebaseFirestore.getInstance().collection("/users").document(user.getUuid());
         a.update("matches", FieldValue.arrayUnion(currentUser.getUid()+"@"+(map+1)+"@"+user.getnMatches()));
