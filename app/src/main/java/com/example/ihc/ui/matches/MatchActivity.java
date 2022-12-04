@@ -5,6 +5,7 @@ import static com.example.ihc.MainActivity.locationsMatches;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -110,8 +111,14 @@ public class MatchActivity extends AppCompatActivity {
             Button b = findViewById(R.id.button_message);
             b.setOnClickListener(v -> {
                 Intent i = new Intent(this, ChatActivity.class);
-                i.putExtra("name", name);
 
+                Bundle extras = new Bundle();
+                extras.putString("name", name);
+                extras.putInt("imageid", imageid);
+                extras.putString("toID", id);
+
+
+                i.putExtras(extras);
                 startActivity(i);
             });
             ImageView map_card = findViewById(R.id.map);

@@ -12,6 +12,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="card_color">#1B1B1B</color>
     <color name="background">#242424</color>
+    <color name="grey">#D3D3D3</color>
 
     <color name="_bg__login_ek2_color">#FFFFFF</color>
     <color name="logo_color">#000000</color>

@@ -90,7 +90,7 @@ public class MatchFragment extends Fragment {
             i.putExtra("age", userMatches.get(position).getAge());
             i.putExtra("phone", userMatches.get(position).getPhotoUri());
             i.putExtra("country", userMatches.get(position).getCountry());
-
+            i.putExtra("id", userMatches.get(position).getUuid());
             i.putExtra("link",userMatches.get(position).getPhotoUri());
             i.putExtra("link_map",locationsMatches.get(position).getImage());
             startActivity(i);

@@ -140,6 +140,8 @@ public class HomeFragment extends Fragment {
                 if(userArrayList.get(value).getUuid()!=null)
                     i.putExtra("id", userArrayList.get(value).getUuid());;
 
+
+
                 i.putExtra("link_to_map",route.getLink());
                 i.putExtra("link_map",route.getImage());
                 startActivity(i);
