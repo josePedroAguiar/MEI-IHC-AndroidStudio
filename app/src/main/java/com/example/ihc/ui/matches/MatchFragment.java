@@ -37,10 +37,8 @@ public class MatchFragment extends Fragment {
     private FragmentMathesBinding binding;
     public static int time = 0;
     public static ArrayList<User> userMatches=new ArrayList<>();
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        MatchViewModel homeViewModel =
-                new ViewModelProvider(this).get(MatchViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        MatchViewModel homeViewModel = new ViewModelProvider(this).get(MatchViewModel.class);
 
         binding = FragmentMathesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

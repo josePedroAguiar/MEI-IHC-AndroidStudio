@@ -82,6 +82,7 @@ public class Splash extends AppCompatActivity {
                     }
                 });}
     }
+
     void getUser(){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser!=null) {
