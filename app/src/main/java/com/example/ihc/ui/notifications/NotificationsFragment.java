@@ -1,5 +1,8 @@
 package com.example.ihc.ui.notifications;
 
+import static com.example.ihc.MainActivity.userArrayList;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +16,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ihc.R;
 import com.example.ihc.databinding.FragmentNotificationsBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.example.ihc.data.User;
+import com.example.ihc.Splash;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,16 +32,16 @@ public class NotificationsFragment extends Fragment {
     private FragmentNotificationsBinding binding;
     ArrayList<String> nomes = new ArrayList<>(Arrays.asList("Miguel", "Tiago", "José", "Pedro", "Tomás"));
     ArrayList<String> subitems = new ArrayList<>(Arrays.asList("Miguel", "Tiago", "José", "Pedro", "Tomás"));
+    public static ArrayList<User> userMatches = new ArrayList<>();
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        NotificationsViewModel notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        fetchUsers();
+
+
         String[] name = {"Christopher", "Craig", "Sergio", "Mubariz", "Mike", "Michael", "Toa", "Ivana", "Alex"};
         String[] lastMessage = {"Heye", "Supp", "Let's Catchup", "Dinner tonight?", "Gotta go",
                 "i'm in meeting", "Gotcha", "Let's Go", "any Weekend Plans?"};
@@ -45,18 +51,37 @@ public class NotificationsFragment extends Fragment {
                 "9439043232", "7534354323", "6545543211", "7654432343"};
         String[] country = {"United States", "Russia", "India", "Israel", "Germany", "Thailand", "Canada", "France", "Switzerland"};
 
-        ArrayList<User> userArrayList = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
+
+
+        //ArrayList<User> userArrayList = new ArrayList<>();
+        /*for (int i = 0; i < 9; i++) {
             User user = new User(name[i], phoneNo[i], country[i]);
             userArrayList.add(user);
-        }
+        }*/
 
         fetchUsers();
+        Log.e("Notifications Fragment: ",Integer.toString(userArrayList.size()));
+
+        //fetchUsers();
         ListAdapter adapter = new ListAdapter(getActivity(), userArrayList);
         //ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,R.id.text_view,nomes);
         ListView listView = root.findViewById(R.id.mobile_list);
         listView.setAdapter(adapter);
         listView.setClickable(true);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent i = new Intent(getActivity(), ChatActivity.class);
+
+            Bundle extras = new Bundle();
+            extras.putString("name", userArrayList.get(position).getName());
+            //extras.putInt("imageid", userArrayList.get(position).getPhotoUri());
+            extras.putString("toID", userArrayList.get(position).getUuid());
+
+
+            i.putExtras(extras);
+            startActivity(i);
+        });
+
+
         return root;
     }
 
@@ -67,7 +92,7 @@ public class NotificationsFragment extends Fragment {
         binding = null;
     }
 
-    private void fetchUsers() {
+    /*private void fetchUsers() {
         FirebaseFirestore.getInstance().collection("/users")
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
@@ -80,7 +105,37 @@ public class NotificationsFragment extends Fragment {
                         User user = doc.toObject(User.class);
                         assert user != null;
                         Log.d("Teste", user.getName());
+                        userMatches.add(user);
+                        //Log.d("Teste2", "Cheguei");
                     }
                 });
+    }*/
+
+    private void fetchUsers() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser!=null) {
+            FirebaseFirestore.getInstance().collection("/users")
+                    .addSnapshotListener((value, error) -> {
+                        if (error != null) {
+                            Log.e("Teste", error.getMessage(), error);
+                            return;
+                        }
+
+                        List<DocumentSnapshot> docs = value.getDocuments();
+
+                        for (DocumentSnapshot doc : docs) {
+                            User user = doc.toObject(User.class);
+                            assert user != null;
+                            Log.d("Teste", user.getName());
+                            int flag = 0;
+                            if(user.getUuid()!=null && user.getUuid().compareTo(currentUser.getUid())!=0) {
+                                for (int i = 0; i < userArrayList.size(); i++) {
+                                    if(user.getUuid().compareTo(userArrayList.get(i).getUuid()) == 0) flag = 1;
+                                }
+                                if(flag == 0) userArrayList.add(user);
+                            }
+                            //Log.e("DEBUG-1",userArrayList.size()+"");
+                        }
+                    });}
     }
 }
