@@ -1,13 +1,10 @@
 package com.example.ihc.data;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class User {
-
-
     private String uuid;
-    private  int order;
+    private int order;
 
     public String getDate() {
         return date;
@@ -18,14 +15,14 @@ public class User {
     }
 
     private String date;
-    private  int nMatches=0;
+    private int nMatches = 0;
     //private  ArrayList<String> photosUri=new ArrayList<>();
-    private String photoUri,bio,name,age, email, country="";
+    private String photoUri, bio, name, age, email, country = "";
 
-    private ArrayList<String> matchesUiid=new ArrayList<>();
+    private ArrayList<String> matchesUiid = new ArrayList<>();
 
     public User() {
-        matchesUiid=new ArrayList<>();
+        matchesUiid = new ArrayList<>();
     }
 
     /*public ArrayList<String> getPhotosUri() {

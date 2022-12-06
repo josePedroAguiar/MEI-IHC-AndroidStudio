@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     private static final String TAG = "MainActivity";
-    public    static ArrayList<User> userArrayList;
-    public    static ArrayList<Route> locationsMatches;
+    public static ArrayList<User> userArrayList;
+    public static ArrayList<Route> locationsMatches;
     // Array list for recycler view data source
 
     // Layout Manager
@@ -83,48 +83,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         return user != null;
         // [END check_current_user]
-    }
-
-    public void getUserProfile() {
-        // [START get_user_profile]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = user.getUid();
-        }
-        // [END get_user_profile]
-    }
-
-    public void updateProfile() {
-        // [START update_profile]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName("Jane Q. User")
-                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                .build();
-
-        assert user != null;
-        user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "User profile updated.");
-                        }
-                    }
-                });
-        // [END update_profile]
     }
 
     public void updateEmail() {

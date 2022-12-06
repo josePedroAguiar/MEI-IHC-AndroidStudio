@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?><!--Relative Layout-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.profile.ProfileFragment"
-    android:id="@+id/relativelayout">
+    android:layout_marginBottom="56dp"
+    tools:context=".ui.profile.ProfileFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/container_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <!--Recycler View widget-->
-
 
             <ImageView
                 android:id="@+id/foto"
                 android:layout_width="match_parent"
-                android:layout_height="635dp"
+                android:layout_height="600dp"
                 android:layout_marginTop="-70dp"
                 android:background="#E6E6E6"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/hassan_khan_egvccebwodm_unsplash" />
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/todo" />
 
             <TextView
-                android:layout_width="270dp"
+                android:id="@+id/profile_name"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignBottom="@+id/foto"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="40dp"
-                android:text="@string/name"
-                android:textSize="32sp"
+                android:background="#48000000"
+                android:paddingHorizontal="20dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
             <Button
@@ -48,47 +49,134 @@
                 android:layout_marginTop="-25dp"
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/teal_700"
-                android:text="@string/edit"
-                app:layout_constraintStart_toEndOf="parent" />
-
-
+                android:text="@string/edit" />
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="342dp"
-            android:layout_height="292dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="-3dp"
-            android:text="asdasdasdjldhwqjekw
-qeq
-qeqw
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/container_image"
+            android:background="@color/background"
+            android:layout_marginTop="8dp">
 
-qwe
-qweqw
-eqwe
-qw
-eqe
-qeqw
-qweqweqe
-wqeqw
-eqwe
-qwe
-qw
-eq
+            <RelativeLayout
+                android:id="@+id/bioRelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingVertical="10dp"
+                android:textColor="@color/white">
 
-qwe
-qw
-eqwe
-qw
-eqweqweqwe
-qeqwe
-bjkkjbjkbjkn
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:orientation="vertical"
+                    android:textColor="@color/white">
 
-"
-            android:textColor="@color/white"
-            android:textSize="24sp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bio"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
+                    <TextView
+                        android:id="@+id/bioProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="26sp" />
 
-            />
-    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ageRelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bioRelative"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingVertical="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Age"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/ageProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="26sp" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/countryRelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ageRelative"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingVertical="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:orientation="vertical"
+                    android:textColor="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Country"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/countryProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="26sp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_below="@+id/bioRelative"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="40dp"
+                android:background="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_below="@+id/ageRelative"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="40dp"
+                android:background="@color/white" />
+        </RelativeLayout>
+    </RelativeLayout>
 </ScrollView>
