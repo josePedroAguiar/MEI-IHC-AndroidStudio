@@ -45,4 +45,5 @@
     <string name="bio">Bio</string>
     <string name="cancel">Cancel</string>
     <string name="city_country">City, Country</string>
+    <string name="phone_number">Phone Number</string>
 </resources>
