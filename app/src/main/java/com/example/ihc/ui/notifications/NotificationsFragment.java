@@ -1,6 +1,7 @@
 package com.example.ihc.ui.notifications;
 
 import static com.example.ihc.MainActivity.userArrayList;
+import static com.example.ihc.MainActivity.messaged;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class NotificationsFragment extends Fragment {
     private FragmentNotificationsBinding binding;
     //ArrayList<String> nomes = new ArrayList<>(Arrays.asList("Miguel", "Tiago", "José", "Pedro", "Tomás"));
     //ArrayList<String> subitems = new ArrayList<>(Arrays.asList("Miguel", "Tiago", "José", "Pedro", "Tomás"));
-    ArrayList<User> messaged;
+    //ArrayList<User> messaged;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,10 +61,10 @@ public class NotificationsFragment extends Fragment {
             userArrayList.add(user);
         }*/
 
-        fetchUsers();
+        //fetchUsers();
 
-        messaged = new ArrayList<>();
-        fetchMessagedUsers();
+
+        //fetchMessagedUsers();
         Log.e("Messaged Size: ", Integer.toString(messaged.size()));
 
 
@@ -81,7 +82,7 @@ public class NotificationsFragment extends Fragment {
 
             Bundle extras = new Bundle();
             extras.putString("name", messaged.get(position).getName());
-            //extras.putInt("imageid", userArrayList.get(position).getPhotoUri());
+            extras.putString("imageid", messaged.get(position).getPhotoUri());
             extras.putString("toID", messaged.get(position).getUuid());
 
 
@@ -100,71 +101,5 @@ public class NotificationsFragment extends Fragment {
         binding = null;
     }
 
-    private void fetchUsers() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser!=null) {
-            FirebaseFirestore.getInstance().collection("/users")
-                    .addSnapshotListener((value, error) -> {
-                        if (error != null) {
-                            Log.e("Teste", error.getMessage(), error);
-                            return;
-                        }
 
-                        List<DocumentSnapshot> docs = value.getDocuments();
-                        Log.d("TAMANHO DOCS USER", Integer.toString(docs.size()));
-
-
-                        for (DocumentSnapshot doc : docs) {
-                            User user = doc.toObject(User.class);
-                            assert user != null;
-                            //Log.d("Teste", user.getName());
-                            int flag = 0;
-                            if(user.getUuid()!=null && user.getUuid().compareTo(currentUser.getUid())!=0) {
-                                for (int i = 0; i < userArrayList.size(); i++) {
-                                    if(user.getUuid().compareTo(userArrayList.get(i).getUuid()) == 0) flag = 1;
-                                }
-                                if(flag == 0) userArrayList.add(user);
-                            }
-                            //Log.e("DEBUG-1",userArrayList.size()+"");
-                        }
-                    });}
-    }
-
-    private void fetchMessagedUsers() {
-
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String fromID = currentUser.getUid();
-
-        if (currentUser!=null) {
-            for(int i = 0; i < userArrayList.size(); i++) {
-                User thisUser = userArrayList.get(i);
-                String toID = thisUser.getUuid();
-                if(fromID.compareTo(toID) != 0 ) Log.d("Current fromID", fromID);
-                FirebaseFirestore.getInstance().collection("conversations")
-                        .document(fromID)
-                        .collection(toID)
-                        .addSnapshotListener((value, error) -> {
-                            if (error != null) {
-                                Log.e("Erro fetch messaged", error.getMessage(), error);
-                                return;
-                            }
-
-                            List<DocumentSnapshot> docs = value.getDocuments();
-                            Log.d("TAMANHO DOCS", Integer.toString(docs.size()));
-
-                            for (DocumentSnapshot doc : docs) {
-                                Chat chat = doc.toObject(Chat.class);
-                                //assert chat != null;
-                                if (chat != null) {
-                                    messaged.add(thisUser);
-                                    Log.d("Teste log", thisUser.getName());
-                                }
-                                else Log.d("Chat nulo", "erroooooooooooooooooo");
-
-                            }
-                        });
-            }
-
-        }
-    }
 }

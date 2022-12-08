@@ -2,6 +2,7 @@ package com.example.ihc;
 
 import static com.example.ihc.MainActivity.locationsMatches;
 import static com.example.ihc.MainActivity.userArrayList;
+import static com.example.ihc.MainActivity.messaged;
 import static com.example.ihc.ui.matches.MatchFragment.userMatches;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ihc.data.Route;
 import com.example.ihc.data.User;
+import com.example.ihc.ui.notifications.Chat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,21 +30,25 @@ import java.util.Objects;
 
 public class Splash extends AppCompatActivity {
     public static User me = new User();
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.hide();
         setContentView(R.layout.activity_slash);
         userArrayList = new ArrayList<>();
-
+        messaged = new ArrayList<>();
         locationsMatches = new ArrayList<>();
         userMatches = new ArrayList<>();
 
         getMatches();
         fetchUsers();
+        //fetchMessagedUsers();
         getUser();
 
         Handler handler = new Handler();
@@ -54,7 +60,7 @@ public class Splash extends AppCompatActivity {
     }
 
     private void fetchUsers() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             FirebaseFirestore.getInstance().collection("/users").addSnapshotListener((value, error) -> {
                 if (error != null) {
@@ -74,12 +80,52 @@ public class Splash extends AppCompatActivity {
                     }
                     //Log.e("DEBUG-1",userArrayList.size()+"");
                 }
+                fetchMessagedUsers();
             });
         }
     }
 
+    private void fetchMessagedUsers() {
+        String fromID = currentUser.getUid();
+
+        if (currentUser!=null) {
+            for(int i = 0; i < userArrayList.size(); i++) {
+                User thisUser = userArrayList.get(i);
+                String toID = thisUser.getUuid();
+
+                if(fromID.compareTo(toID) != 0 ) Log.d("Current fromID", fromID);
+
+                FirebaseFirestore.getInstance().collection("conversations")
+                        .document(fromID)
+                        .collection(toID)
+                        .addSnapshotListener((value, error) -> {
+                            /*if (error != null) {
+                                Log.e("Erro fetch messaged", error.getMessage(), error);
+                                return;
+                            }*/
+
+                            List<DocumentSnapshot> docs = value.getDocuments();
+                            Log.d("TAMANHO DOCS", Integer.toString(docs.size()));
+
+                            for (DocumentSnapshot doc : docs) {
+                                Chat chat = doc.toObject(Chat.class);
+                                //assert chat != null;
+                                if (chat != null) {
+                                    messaged.add(thisUser);
+                                    break;
+                                    //Log.d("Teste log", chat.getText());
+                                }
+                                else Log.d("Chat nulo", "erroooooooooooooooooo");
+
+                            }
+                        });
+            }
+
+        }
+    }
+
     void getUser() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             DocumentReference docRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
             docRef.get().addOnSuccessListener(documentSnapshot -> me = documentSnapshot.toObject(User.class));
@@ -87,7 +133,7 @@ public class Splash extends AppCompatActivity {
     }
 
     boolean getUser(String uuid, String local, String pos) {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             DocumentReference docRef = FirebaseFirestore.getInstance().collection("/users").document(uuid);
             docRef.get().addOnSuccessListener(documentSnapshot -> {
@@ -107,7 +153,7 @@ public class Splash extends AppCompatActivity {
     }
 
     void getMatches() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             Log.e("DEBUG", "aaaaa");
             FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid()).get().addOnCompleteListener(task -> {

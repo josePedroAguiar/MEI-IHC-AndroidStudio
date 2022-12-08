@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     public static ArrayList<User> userArrayList;
+    public static ArrayList<User> messaged;
     public static ArrayList<Route> locationsMatches;
     // Array list for recycler view data source
 

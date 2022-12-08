@@ -16,6 +16,7 @@ import com.example.ihc.R;
 import org.w3c.dom.Text;
 
 import com.example.ihc.data.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -33,12 +34,17 @@ public class ListAdapter extends ArrayAdapter<User> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.items, parent, false);
         }
-        //ImageView imageView = convertView.findViewById(R.id.profile_pic);
+        ImageView imageView = convertView.findViewById(R.id.img);
         TextView userName = convertView.findViewById(R.id.personName);
         TextView lastMsg = convertView.findViewById(R.id.lastMessage);
         TextView time = convertView.findViewById(R.id.msgtime);
 
-        //imageView.setImageResource(user.imageId);
+        //imageView.setImageResource(user.getPhotoUri());
+        if(user.getPhotoUri() == null) {
+            imageView.setImageResource(R.drawable.ic_baseline_person_24);
+        } else {
+            Picasso.get().load(user.getPhotoUri()).into(imageView);
+        }
         userName.setText(user.getName());
         lastMsg.setText("");
         time.setText("");
