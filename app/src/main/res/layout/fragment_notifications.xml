@@ -10,7 +10,8 @@
         android:id="@+id/mobile_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="56dp" />
+        android:layout_marginBottom="56dp"
+        android:background="@color/background" />
 
 
 </LinearLayout>

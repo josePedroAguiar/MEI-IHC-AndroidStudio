@@ -2,7 +2,6 @@ package com.example.ihc.ui.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.example.ihc.EditProfile;
+import com.example.ihc.R;
 import com.example.ihc.data.User;
 import com.example.ihc.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
@@ -50,7 +47,9 @@ public class ProfileFragment extends Fragment {
             TextView country = binding.countryProfile;
             country.setText(user.getCountry());
             ImageView i = binding.foto;
-            Picasso.get().load(user.getPhotoUri()).into(i);
+            i.setImageResource(R.drawable.ic_baseline_person_24);
+            if (user.getPhotoUri() != null)
+                Picasso.get().load(user.getPhotoUri()).into(i);
         });
         return binding.getRoot();
     }

@@ -16,7 +16,6 @@ public class User {
 
     private String date;
     private int nMatches = 0;
-    //private  ArrayList<String> photosUri=new ArrayList<>();
     private String photoUri, bio, name, age, email, country = "";
 
     private ArrayList<String> matchesUiid = new ArrayList<>();
@@ -24,10 +23,6 @@ public class User {
     public User() {
         matchesUiid = new ArrayList<>();
     }
-
-    /*public ArrayList<String> getPhotosUri() {
-        return photosUri;
-    }*/
 
     public String getBio() {
         return bio;
@@ -41,18 +36,9 @@ public class User {
         return uuid;
     }
 
-    public ArrayList<String> getMatchesUUIDs() {
-        return matchesUiid;
-    }
-
     public User(String name, String email) {
         this.name = name;
         this.email = email;
-    }
-
-    public User(String name, String phoneNo, String country) {
-        this.name = name;
-        this.country = country;
     }
 
     public String getName() {

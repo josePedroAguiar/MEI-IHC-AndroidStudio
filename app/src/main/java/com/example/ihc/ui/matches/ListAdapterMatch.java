@@ -1,7 +1,6 @@
 package com.example.ihc.ui.matches;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ihc.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListAdapterMatch extends ArrayAdapter<Match> {
-
-
     public ListAdapterMatch(Context context, ArrayList<Match> userArrayList) {
         super(context, R.layout.items_match, userArrayList);
     }
@@ -41,6 +31,7 @@ public class ListAdapterMatch extends ArrayAdapter<Match> {
         }
 
         ImageView imageView = convertView.findViewById(R.id.image);
+        imageView.setImageResource(R.drawable.ic_baseline_person_24);
         ImageView imageView2 = convertView.findViewById(R.id.map);
         TextView userName = convertView.findViewById(R.id.personName);
 
@@ -55,22 +46,7 @@ public class ListAdapterMatch extends ArrayAdapter<Match> {
         time.setText(match.age);
         bio.setText(match.country);
 
-
         return convertView;
     }
 
-    void getMatches() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.e("DEBUG", "aaaaa");
-        assert currentUser != null;
-        FirebaseFirestore.getInstance().collection("/users")
-                .document(currentUser.getUid()).get()
-                .addOnCompleteListener(
-                        task -> {
-                            DocumentSnapshot document = task.getResult();
-                            List<String> group = (List<String>) document.get("matches");
-                            assert group != null;
-                            Log.d("myTag", group.get(0));
-                        });
-    }
 }

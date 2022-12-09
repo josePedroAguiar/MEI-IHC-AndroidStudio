@@ -12,9 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ihc.R;
-
-import org.w3c.dom.Text;
-
 import com.example.ihc.data.User;
 import com.squareup.picasso.Picasso;
 
@@ -39,12 +36,10 @@ public class ListAdapter extends ArrayAdapter<User> {
         TextView lastMsg = convertView.findViewById(R.id.lastMessage);
         TextView time = convertView.findViewById(R.id.msgtime);
 
-        //imageView.setImageResource(user.getPhotoUri());
-        if(user.getPhotoUri() == null) {
-            imageView.setImageResource(R.drawable.ic_baseline_person_24);
-        } else {
+        imageView.setImageResource(R.drawable.ic_baseline_person_24);
+        if (user.getPhotoUri() != null)
             Picasso.get().load(user.getPhotoUri()).into(imageView);
-        }
+
         userName.setText(user.getName());
         lastMsg.setText("");
         time.setText("");

@@ -51,7 +51,6 @@ public class HomeFragment extends Fragment {
     private int value;
     static Route route;
     private ImageButton logoutBtn;
-    //public static int time = 0;
     Integer map;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -42,7 +42,10 @@ public class MatchActivity extends AppCompatActivity {
             binding.countryProfile.setText(country);
 
             ImageView user = binding.image;
-            Picasso.get().load(link).into(user);
+            user.setImageResource(imageid);
+
+            if (link != null)
+                Picasso.get().load(link).into(user);
             ImageView map = binding.map;
             Picasso.get().load(link_map).into(map);
 
