@@ -6,11 +6,11 @@ public class Match {
     String name, mapId, age, phoneNo, country;
     String imageId;
 
-    public Match(String name, String mapId, String age, String phoneNo, String country, String imageId) {
+    public Match(String name, String mapId, String age, String linkid, String country, String imageId) {
         this.name = name;
         this.mapId = mapId;
-        this.age = age;
         this.phoneNo = phoneNo;
+        this.age = age;
         this.country = country;
         this.imageId = imageId;
     }

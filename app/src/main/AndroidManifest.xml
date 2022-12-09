@@ -83,11 +83,10 @@
         </activity>
         <activity
             android:name=".EditProfile"
-            android:exported="false"
             android:label="EditProfile">
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.profile.Profile" />
         </activity>
         <activity
             android:name=".Splash"

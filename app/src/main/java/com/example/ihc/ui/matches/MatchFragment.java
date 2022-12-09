@@ -58,6 +58,7 @@ public class MatchFragment extends Fragment {
             i.putExtra("id", userMatches.get(position).getUuid());
             i.putExtra("link", userMatches.get(position).getPhotoUri());
             i.putExtra("link_map", locationsMatches.get(position).getImage());
+            i.putExtra("link_to_map", locationsMatches.get(position).getLink());
             startActivity(i);
         });
 
