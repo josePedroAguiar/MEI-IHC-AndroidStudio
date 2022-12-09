@@ -111,7 +111,14 @@ public class Splash extends AppCompatActivity {
                                 Chat chat = doc.toObject(Chat.class);
                                 //assert chat != null;
                                 if (chat != null) {
-                                    messaged.add(thisUser);
+                                    int flag = 0;
+                                    for(int j = 0; j < messaged.size(); j++) {
+                                        if (messaged.get(j).getUuid().compareTo(thisUser.getUuid()) == 0) {
+                                            flag = 1; //este user ja esta na lista
+                                            break;
+                                        }
+                                    }
+                                    if (flag == 0) messaged.add(thisUser);
                                     break;
                                     //Log.d("Teste log", chat.getText());
                                 }
