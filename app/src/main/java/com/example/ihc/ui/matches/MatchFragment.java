@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class MatchFragment extends Fragment {
 
     private FragmentMathesBinding binding;
-    public static int time = 0;
     public static ArrayList<User> userMatches = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -34,19 +33,10 @@ public class MatchFragment extends Fragment {
         binding = FragmentMathesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        String[] name = {"Christopher", "Craig", "Sergio", "Mubariz", "Mike", "Michael", "Toa", "Ivana", "Alex"};
-        String[] lastMessage = {"Heye", "Supp", "Let's Catchup", "Dinner tonight?", "Gotta go",
-                "i'm in meeting", "Gotcha", "Let's Go", "any Weekend Plans?"};
-        String[] lastmsgTime = {"8:45 pm", "9:00 am", "7:34 pm", "6:32 am", "5:76 am",
-                "5:00 am", "7:34 pm", "2:32 am", "7:76 am"};
-        String[] phoneNo = {"7656610000", "9999043232", "7834354323", "9876543211", "5434432343",
-                "9439043232", "7534354323", "6545543211", "7654432343"};
-        String[] country = {"United States", "Russia", "India", "Israel", "Germany", "Thailand", "Canada", "France", "Switzerland"};
-
         ArrayList<Match> userArrayList = new ArrayList<>();
 
         Log.e("wewe", Integer.toString(userMatches.size()));
-        Log.e("wewe", Integer.toString(locationsMatches.size()));
+        //Log.e("LOCATIONS SIZE", Integer.toString(locationsMatches.size()));
         int pos = 0;
         for (User user : userMatches) {
             Match match = new Match(user.getName(), locationsMatches.get(pos).getImage(), user.getAge(), user.getPhotoUri(), user.getCountry(), user.getPhotoUri());
