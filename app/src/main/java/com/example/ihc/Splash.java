@@ -31,7 +31,7 @@ import java.util.Objects;
 public class Splash extends AppCompatActivity {
     public static User me = new User();
     FirebaseUser currentUser;
-
+    static public Integer b = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -45,12 +45,11 @@ public class Splash extends AppCompatActivity {
         messaged = new ArrayList<>();
         locationsMatches = new ArrayList<>();
         userMatches = new ArrayList<>();
-
         getMatches();
         fetchUsers();
         //fetchMessagedUsers();
         getUser();
-
+        getSkip();
         Handler handler = new Handler();
 
         handler.postDelayed(() -> {
@@ -189,5 +188,13 @@ public class Splash extends AppCompatActivity {
 
         });
     }
-
+    void getSkip() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        DocumentReference docRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+                    b = Integer.parseInt(documentSnapshot.get("skip").toString());
+                    Log.e("DEBUG", " "+b);
+                }
+        );
+    }
 }

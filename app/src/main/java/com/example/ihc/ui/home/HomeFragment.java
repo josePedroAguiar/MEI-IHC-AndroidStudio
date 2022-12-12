@@ -5,6 +5,8 @@ import static com.example.ihc.Splash.me;
 import static com.example.ihc.ui.matches.MatchFragment.userMatches;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -40,19 +42,47 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class HomeFragment extends Fragment {
 
     FragmentHomeBinding binding;
     private LuckyWheel wheel;
-
     private List<WheelItem> wheelItemList = new ArrayList<>();
     private String points;
     private int value;
     static Route route;
     private ImageButton logoutBtn;
     Integer map;
+    void alert(){
+        // Create the object of AlertDialog Builder class
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        // Set the message show for the Alert time
+        builder.setMessage("\n" +
+                "This operation will make exit to this account.You will have to login again if you want to use the application .\n Do you want to continue?");
+
+        // Set Alert Title
+        builder.setTitle("Do you want to Logout?");
+
+        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+        builder.setCancelable(false);
+
+        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            dialog.cancel();
+        });
+        builder.setPositiveButton("Yes ", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            signOut();
+            Intent intent = new Intent(getActivity(), Login.class);
+            startActivity(intent);
+        });
+        builder.show();
+    }
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
@@ -131,9 +161,8 @@ public class HomeFragment extends Fragment {
 
         logoutBtn = binding.logoutBtn;
         logoutBtn.setOnClickListener(v -> {
-            signOut();
-            Intent intent = new Intent(getActivity(), Login.class);
-            startActivity(intent);
+         alert();
+
         });
         return root;
     }
@@ -219,7 +248,6 @@ public class HomeFragment extends Fragment {
         a.update("matches", FieldValue.arrayUnion(currentUser.getUid() + "@" + (map + 1) + "@" + user.getnMatches()));
         a.update("nMatches", FieldValue.increment(1));
     }
-
     void getLoctions(String uuid) {
         DocumentReference docRef = FirebaseFirestore.getInstance().collection("/locations").document(uuid);
         docRef.get().addOnSuccessListener(documentSnapshot -> {
@@ -229,8 +257,10 @@ public class HomeFragment extends Fragment {
                 }
         );
     }
-}
 
+
+
+}
 
 
 

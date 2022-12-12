@@ -2,6 +2,8 @@ package com.example.ihc.ui.matches;
 
 import static com.example.ihc.MainActivity.locationsMatches;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,6 +63,8 @@ public class MatchFragment extends Fragment {
             i.putExtra("link_to_map", locationsMatches.get(position).getLink());
             startActivity(i);
         });
+
+
 
         return root;
     }

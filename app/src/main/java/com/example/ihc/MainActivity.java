@@ -1,5 +1,7 @@
 package com.example.ihc;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -144,6 +147,34 @@ public class MainActivity extends AppCompatActivity {
         // [END auth_email_cred]
     }
 
+    public boolean signOutPopUp(){
+        // Create the object of AlertDialog Builder class
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+        // Set the message show for the Alert time
+        builder.setMessage("\n" +
+                "This operation redirects you out of the application. If you want to send a message or see your matches you will have to return to the application alone.\n Do you want to continue?");
+
+        // Set Alert Title
+        builder.setTitle("Do you want to continue?!");
+
+        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+        builder.setCancelable(false);
+        AtomicBoolean var= new AtomicBoolean(false);
+        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            var.set(false);
+            dialog.cancel();
+
+        });
+        builder.setPositiveButton("Yes ", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            var.set(true);
+        });
+        return var.get();
+    }
     @Override
     protected void onRestart() {
         super.onRestart();
