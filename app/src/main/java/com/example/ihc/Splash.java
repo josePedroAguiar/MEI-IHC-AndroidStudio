@@ -34,6 +34,7 @@ public class Splash extends AppCompatActivity {
     static public Integer b = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         super.onCreate(savedInstanceState);
@@ -45,17 +46,24 @@ public class Splash extends AppCompatActivity {
         messaged = new ArrayList<>();
         locationsMatches = new ArrayList<>();
         userMatches = new ArrayList<>();
+
         getMatches();
         fetchUsers();
         //fetchMessagedUsers();
         getUser();
-        getSkip();
+        //getSkip();
         Handler handler = new Handler();
 
         handler.postDelayed(() -> {
             startActivity(new Intent(Splash.this, MainActivity.class));
             finish();
         }, 5000);
+    }
+    public boolean checkCurrentUser() {
+        // [START check_current_user]
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        return user != null;
+        // [END check_current_user]
     }
 
     private void fetchUsers() {
@@ -189,6 +197,7 @@ public class Splash extends AppCompatActivity {
         });
     }
     void getSkip() {
+        if (currentUser != null) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DocumentReference docRef = FirebaseFirestore.getInstance().collection("/users").document(currentUser.getUid());
         docRef.get().addOnSuccessListener(documentSnapshot -> {
@@ -196,5 +205,6 @@ public class Splash extends AppCompatActivity {
                     Log.e("DEBUG", " "+b);
                 }
         );
+        }
     }
 }

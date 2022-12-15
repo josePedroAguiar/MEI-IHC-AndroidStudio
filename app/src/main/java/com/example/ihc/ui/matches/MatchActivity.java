@@ -113,12 +113,7 @@ public class MatchActivity extends AppCompatActivity {
                 Uri uri = Uri.parse(link_to_map);
 
                 Intent i = new Intent(Intent.ACTION_VIEW, uri);
-                getSkip();
-                if (b!=1)
                 alert(i);
-                else
-                    startActivity(i);
-                //
             });
 
         }
